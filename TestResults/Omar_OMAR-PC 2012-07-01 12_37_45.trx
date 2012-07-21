@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="e90662b5-d165-4a5b-9530-34fb38bfd947" name="Omar@OMAR-PC 2012-07-01 12:37:45" runUser="Omar-PC\Omar" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="eef0e273-97f3-4062-8c3f-615cccc566c4">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment userDeploymentRoot="C:\Users\Omar\Downloads\2-Apriori Source Code\TestResults" useDefaultDeploymentRoot="false" enabled="false" runDeploymentRoot="Omar_OMAR-PC 2012-07-01 12_37_45">
+      <DeploymentItem filename="C:\Users\Omar\Downloads\2-Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2012-07-01T12:37:45.8850219+02:00" queuing="2012-07-01T12:37:45.9090233+02:00" start="2012-07-01T12:37:45.9210240+02:00" finish="2012-07-01T12:37:46.7830733+02:00" />
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="SolveTest" storage="c:\users\omar\downloads\2-apriori source code\unittests\bin\debug\unittests.dll" id="9df1575e-a82a-a791-2d6a-6724eae7cc43">
+      <Execution id="d3ab8ecc-7fbd-49c5-8ca8-c5acdf7b0ecc" />
+      <TestMethod codeBase="C:/Users/Omar/Downloads/2-Apriori Source Code/UnitTests/bin/Debug/UnitTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTests.AprioriTest, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SolveTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="9df1575e-a82a-a791-2d6a-6724eae7cc43" executionId="d3ab8ecc-7fbd-49c5-8ca8-c5acdf7b0ecc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="d3ab8ecc-7fbd-49c5-8ca8-c5acdf7b0ecc" testId="9df1575e-a82a-a791-2d6a-6724eae7cc43" testName="SolveTest" computerName="OMAR-PC" duration="00:00:00.0922425" startTime="2012-07-01T12:37:45.9240242+02:00" endTime="2012-07-01T12:37:46.4240528+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d3ab8ecc-7fbd-49c5-8ca8-c5acdf7b0ecc">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual failed. Expected:&lt;5&gt;. Actual:&lt;7&gt;. </Message>
+          <StackTrace>   at UnitTests.AprioriTest.SolveTest() in C:\Users\Omar\Downloads\2-Apriori Source Code\UnitTests\AprioriTest.cs:line 72
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="e2f771b8-08e4-4aa3-848a-2f844e5feac2" name="Omar@OMAR-PC 2012-06-28 18:05:50" runUser="Omar-PC\Omar" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="eef0e273-97f3-4062-8c3f-615cccc566c4">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment enabled="false" runDeploymentRoot="Omar_OMAR-PC 2012-06-28 18_05_50">
+      <DeploymentItem filename="C:\Users\Omar\Downloads\2-Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2012-06-28T18:05:50.9763800+02:00" queuing="2012-06-28T18:05:51.0293830+02:00" start="2012-06-28T18:05:51.2243942+02:00" finish="2012-06-28T18:05:51.8834319+02:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="7" executed="7" passed="7" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="GetCandidateTest" storage="c:\users\omar\downloads\2-apriori source code\unittests\bin\debug\unittests.dll" id="e4f2ff6e-dd05-b4c0-2739-5d9cbc7a2773">
+      <Execution id="36565352-8e14-4696-90fa-0cac1834cde6" />
+      <TestMethod codeBase="C:/Users/Omar/Downloads/2-Apriori Source Code/UnitTests/bin/Debug/UnitTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTests.AprioriTest, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetCandidateTest" />
+    </UnitTest>
+    <UnitTest name="CheckIsSubsetTest" storage="c:\users\omar\downloads\2-apriori source code\unittests\bin\debug\unittests.dll" id="47355744-f9b3-7ddf-e694-1d993a4aff04">
+      <Execution id="107b0e15-f3f1-4d56-9cac-545e30039dee" />
+      <TestMethod codeBase="C:/Users/Omar/Downloads/2-Apriori Source Code/UnitTests/bin/Debug/UnitTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTests.AprioriTest, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="CheckIsSubsetTest" />
+    </UnitTest>
+    <UnitTest name="GetL1FrequentItemsTest" storage="c:\users\omar\downloads\2-apriori source code\unittests\bin\debug\unittests.dll" id="d9452e47-f6d3-fd21-14d3-de11b83794de">
+      <Execution id="1f4fe3a3-7f71-456f-8b42-750bebed0265" />
+      <TestMethod codeBase="C:/Users/Omar/Downloads/2-Apriori Source Code/UnitTests/bin/Debug/UnitTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTests.AprioriTest, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetL1FrequentItemsTest" />
+    </UnitTest>
+    <UnitTest name="AlphabetizeTest" storage="c:\users\omar\downloads\2-apriori source code\unittests\bin\debug\unittests.dll" id="1411a112-5b25-a54f-81fc-f83f3e3937d7">
+      <Execution id="fb2125c6-13c8-495c-b3b0-ba48415722d4" />
+      <TestMethod codeBase="C:/Users/Omar/Downloads/2-Apriori Source Code/UnitTests/bin/Debug/UnitTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTests.AprioriTest, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="AlphabetizeTest" />
+    </UnitTest>
+    <UnitTest name="GetSupportTest" storage="c:\users\omar\downloads\2-apriori source code\unittests\bin\debug\unittests.dll" id="f7f977c7-b1c5-b0a6-f983-8fb2c58ca403">
+      <Execution id="883b978b-37c2-42ed-b3e3-d3e628b0a001" />
+      <TestMethod codeBase="C:/Users/Omar/Downloads/2-Apriori Source Code/UnitTests/bin/Debug/UnitTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTests.AprioriTest, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetSupportTest" />
+    </UnitTest>
+    <UnitTest name="SolveTest" storage="c:\users\omar\downloads\2-apriori source code\unittests\bin\debug\unittests.dll" id="9df1575e-a82a-a791-2d6a-6724eae7cc43">
+      <Execution id="0ad22efb-86c6-4c9a-aea7-404348fd0ca9" />
+      <TestMethod codeBase="C:/Users/Omar/Downloads/2-Apriori Source Code/UnitTests/bin/Debug/UnitTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTests.AprioriTest, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SolveTest" />
+    </UnitTest>
+    <UnitTest name="GenerateCandidatesTest" storage="c:\users\omar\downloads\2-apriori source code\unittests\bin\debug\unittests.dll" id="806e8973-81b6-8790-7470-23437b085dfa">
+      <Execution id="16dff3cc-625c-4560-bbd8-29f4f8917bb7" />
+      <TestMethod codeBase="C:/Users/Omar/Downloads/2-Apriori Source Code/UnitTests/bin/Debug/UnitTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTests.AprioriTest, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GenerateCandidatesTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="1411a112-5b25-a54f-81fc-f83f3e3937d7" executionId="fb2125c6-13c8-495c-b3b0-ba48415722d4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="47355744-f9b3-7ddf-e694-1d993a4aff04" executionId="107b0e15-f3f1-4d56-9cac-545e30039dee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="806e8973-81b6-8790-7470-23437b085dfa" executionId="16dff3cc-625c-4560-bbd8-29f4f8917bb7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9df1575e-a82a-a791-2d6a-6724eae7cc43" executionId="0ad22efb-86c6-4c9a-aea7-404348fd0ca9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d9452e47-f6d3-fd21-14d3-de11b83794de" executionId="1f4fe3a3-7f71-456f-8b42-750bebed0265" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e4f2ff6e-dd05-b4c0-2739-5d9cbc7a2773" executionId="36565352-8e14-4696-90fa-0cac1834cde6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f7f977c7-b1c5-b0a6-f983-8fb2c58ca403" executionId="883b978b-37c2-42ed-b3e3-d3e628b0a001" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="fb2125c6-13c8-495c-b3b0-ba48415722d4" testId="1411a112-5b25-a54f-81fc-f83f3e3937d7" testName="AlphabetizeTest" computerName="OMAR-PC" duration="00:00:00.0349020" startTime="2012-06-28T18:05:51.2913980+02:00" endTime="2012-06-28T18:05:51.7364235+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fb2125c6-13c8-495c-b3b0-ba48415722d4">
+    </UnitTestResult>
+    <UnitTestResult executionId="107b0e15-f3f1-4d56-9cac-545e30039dee" testId="47355744-f9b3-7ddf-e694-1d993a4aff04" testName="CheckIsSubsetTest" computerName="OMAR-PC" duration="00:00:00.0055367" startTime="2012-06-28T18:05:51.7394236+02:00" endTime="2012-06-28T18:05:51.7554245+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="107b0e15-f3f1-4d56-9cac-545e30039dee">
+    </UnitTestResult>
+    <UnitTestResult executionId="16dff3cc-625c-4560-bbd8-29f4f8917bb7" testId="806e8973-81b6-8790-7470-23437b085dfa" testName="GenerateCandidatesTest" computerName="OMAR-PC" duration="00:00:00.0193115" startTime="2012-06-28T18:05:51.7574247+02:00" endTime="2012-06-28T18:05:51.7854263+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="16dff3cc-625c-4560-bbd8-29f4f8917bb7">
+    </UnitTestResult>
+    <UnitTestResult executionId="0ad22efb-86c6-4c9a-aea7-404348fd0ca9" testId="9df1575e-a82a-a791-2d6a-6724eae7cc43" testName="SolveTest" computerName="OMAR-PC" duration="00:00:00.0170510" startTime="2012-06-28T18:05:51.7864263+02:00" endTime="2012-06-28T18:05:51.8124278+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0ad22efb-86c6-4c9a-aea7-404348fd0ca9">
+    </UnitTestResult>
+    <UnitTestResult executionId="1f4fe3a3-7f71-456f-8b42-750bebed0265" testId="d9452e47-f6d3-fd21-14d3-de11b83794de" testName="GetL1FrequentItemsTest" computerName="OMAR-PC" duration="00:00:00.0023324" startTime="2012-06-28T18:05:51.8194282+02:00" endTime="2012-06-28T18:05:51.8314289+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1f4fe3a3-7f71-456f-8b42-750bebed0265">
+    </UnitTestResult>
+    <UnitTestResult executionId="36565352-8e14-4696-90fa-0cac1834cde6" testId="e4f2ff6e-dd05-b4c0-2739-5d9cbc7a2773" testName="GetCandidateTest" computerName="OMAR-PC" duration="00:00:00.0016679" startTime="2012-06-28T18:05:51.8354291+02:00" endTime="2012-06-28T18:05:51.8454297+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="36565352-8e14-4696-90fa-0cac1834cde6">
+    </UnitTestResult>
+    <UnitTestResult executionId="883b978b-37c2-42ed-b3e3-d3e628b0a001" testId="f7f977c7-b1c5-b0a6-f983-8fb2c58ca403" testName="GetSupportTest" computerName="OMAR-PC" duration="00:00:00.0010539" startTime="2012-06-28T18:05:51.8474298+02:00" endTime="2012-06-28T18:05:51.8564303+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="883b978b-37c2-42ed-b3e3-d3e628b0a001">
+    </UnitTestResult>
+  </Results>
+</TestRun>

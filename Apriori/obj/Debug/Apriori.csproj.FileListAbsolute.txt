@@ -1,0 +1,15 @@
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\Apriori.frmMain.resources
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\Apriori.frmOutput.resources
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\Apriori.Properties.Resources.resources
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\bin\Debug\Apriori.exe.config
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\bin\Debug\Apriori.exe
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\bin\Debug\Apriori.pdb
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\bin\Debug\AprioriAlgorithm.dll
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\bin\Debug\AprioriAlgorithm.pdb
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\Apriori.exe
+C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\Apriori.pdb
