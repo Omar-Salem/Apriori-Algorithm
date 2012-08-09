@@ -18,14 +18,13 @@
 
         Output IApriori.Solve(double minSupport, double minConfidence, IEnumerable<string> items, Dictionary<int, string> transactions)
         {
-            ////Scan the transaction database to get the support S of each 1-itemset,
             Dictionary<string, double> frequentItems = GetL1FrequentItems(minSupport, items, transactions);
             Dictionary<string, double> candidates = new Dictionary<string, double>();
-            int lastTransId = transactions.Keys.ElementAt(transactions.Count - 1);
+            double transactionsCount = transactions.Count;
             do
             {
                 candidates = GenerateCandidates(frequentItems, transactions);
-                frequentItems = GetFrequentItems(candidates, minSupport, lastTransId);
+                frequentItems = GetFrequentItems(candidates, minSupport, transactionsCount);
             }
             while (candidates.Count != 0);
 
@@ -49,11 +48,11 @@
         private Dictionary<string, double> GetL1FrequentItems(double minSupport, IEnumerable<string> items, Dictionary<int, string> transactions)
         {
             var result = new Dictionary<string, double>();
-            int lastTransId = transactions.Keys.ElementAt(transactions.Count - 1);
+            double transactionsCount = transactions.Count;
             foreach (var item in items)
             {
                 double dSupport = GetSupport(item, transactions);
-                if ((dSupport / (double)lastTransId >= minSupport))
+                if ((dSupport / transactionsCount >= minSupport))
                 {
                     result.Add(item, dSupport);
                     _allFrequentItems.Add(item, dSupport);
@@ -90,9 +89,11 @@
         private Dictionary<string, double> GenerateCandidates(Dictionary<string, double> frequentItems, Dictionary<int, string> transactions)
         {
             Dictionary<string, double> candidates = new Dictionary<string, double>();
-            for (int i = 0; i < frequentItems.Count - 1; i++)
+
+            int i = 0;
+            foreach (var item in frequentItems.Keys)
             {
-                string firstItem = Sort(frequentItems.Keys.ElementAt(i));
+                string firstItem = Sort(item);
                 for (int j = i + 1; j < frequentItems.Count; j++)
                 {
                     string secondItem = Sort(frequentItems.Keys.ElementAt(j));
@@ -104,7 +105,10 @@
                         candidates.Add(generatedCandidate, dSupport);
                     }
                 }
+
+                i++;
             }
+
             return candidates;
         }
 
@@ -135,33 +139,34 @@
             }
         }
 
-        private Dictionary<string, double> GetFrequentItems(Dictionary<string, double> candidates, double minSupport, int lastTransId)
+        private Dictionary<string, double> GetFrequentItems(Dictionary<string, double> candidates, double minSupport, double transactionsCount)
         {
             var result = new Dictionary<string, double>();
-            for (int i = candidates.Count - 1; i >= 0; i--)
+
+            foreach (var item in candidates)
             {
-                string item = candidates.Keys.ElementAt(i);
-                double support = candidates[item];
-                if ((support / (double)lastTransId >= minSupport))
+                if ((item.Value / transactionsCount >= minSupport))
                 {
-                    result.Add(item, support);
-                    _allFrequentItems.Add(item, support);
+                    result.Add(item.Key, item.Value);
+                    _allFrequentItems.Add(item.Key, item.Value);
                 }
             }
+
             return result;
         }
 
         private Dictionary<string, Dictionary<string, double>> GetClosedItemSets(Dictionary<string, double> AllFrequentItems)
         {
             var result = new Dictionary<string, Dictionary<string, double>>();
-            for (int i = 0; i < AllFrequentItems.Count; i++)
+            int i = 0;
+            foreach (var item in AllFrequentItems)
             {
-                string child = AllFrequentItems.Keys.ElementAt(i);
-                var parents = GetItemParents(child, i + 1, AllFrequentItems);
-                if (IsClosed(child, parents, AllFrequentItems))
+                var parents = GetItemParents(item.Key, i + 1, AllFrequentItems);
+                if (IsClosed(item.Key, parents, AllFrequentItems))
                 {
-                    result.Add(child, parents);
+                    result.Add(item.Key, parents);
                 }
+                i++;
             }
             return result;
         }

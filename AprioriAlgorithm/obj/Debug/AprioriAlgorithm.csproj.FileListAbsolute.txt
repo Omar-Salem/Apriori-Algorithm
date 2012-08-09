@@ -3,3 +3,8 @@ C:\Users\Omar\Downloads\2-Apriori Source Code\AprioriAlgorithm\bin\Debug\Apriori
 C:\Users\Omar\Downloads\2-Apriori Source Code\AprioriAlgorithm\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Omar\Downloads\2-Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.dll
 C:\Users\Omar\Downloads\2-Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.pdb
+C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.dll
+C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.pdb
+C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.dll
+C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.pdb

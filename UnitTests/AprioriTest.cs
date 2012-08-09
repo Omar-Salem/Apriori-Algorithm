@@ -15,7 +15,7 @@ namespace UnitTests
         readonly IEnumerable<string> items;
         readonly Dictionary<int, string> transactions;
         readonly Apriori_Accessor target;
-        readonly int lastTransId; 
+        //readonly int lastTransId; 
 
         #endregion
 
@@ -32,7 +32,6 @@ namespace UnitTests
                 {4,"be"}
             };
             target = new Apriori_Accessor();
-            lastTransId = 4;
         }
 
         #region Test Methods
@@ -189,7 +188,7 @@ namespace UnitTests
             };
 
             //Act
-            var actual = target.GetFrequentItems(candidates, minSupport, lastTransId);
+            var actual = target.GetFrequentItems(candidates, minSupport, transactions.Count);
 
             //Assert
             Assert.AreEqual(actual.Count, 4);

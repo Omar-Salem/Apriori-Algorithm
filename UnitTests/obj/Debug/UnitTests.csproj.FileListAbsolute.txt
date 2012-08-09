@@ -7,3 +7,12 @@ C:\Users\Omar\Downloads\2-Apriori Source Code\UnitTests\bin\Debug\AprioriAlgorit
 C:\Users\Omar\Downloads\2-Apriori Source Code\UnitTests\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Omar\Downloads\2-Apriori Source Code\UnitTests\obj\Debug\UnitTests.dll
 C:\Users\Omar\Downloads\2-Apriori Source Code\UnitTests\obj\Debug\UnitTests.pdb
+C:\Users\Omar\Desktop\Git\Apriori Source Code\UnitTests\bin\Debug\UnitTests.dll
+C:\Users\Omar\Desktop\Git\Apriori Source Code\UnitTests\bin\Debug\UnitTests.pdb
+C:\Users\Omar\Desktop\Git\Apriori Source Code\UnitTests\bin\Debug\AprioriAlgorithm.dll
+C:\Users\Omar\Desktop\Git\Apriori Source Code\UnitTests\bin\Debug\AprioriAlgorithm.pdb
+C:\Users\Omar\Desktop\Git\Apriori Source Code\UnitTests\bin\Debug\AprioriAlgorithm_Accessor.dll
+C:\Users\Omar\Desktop\Git\Apriori Source Code\UnitTests\bin\Debug\AprioriAlgorithm_Accessor.pdb
+C:\Users\Omar\Desktop\Git\Apriori Source Code\UnitTests\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Omar\Desktop\Git\Apriori Source Code\UnitTests\obj\Debug\UnitTests.dll
+C:\Users\Omar\Desktop\Git\Apriori Source Code\UnitTests\obj\Debug\UnitTests.pdb

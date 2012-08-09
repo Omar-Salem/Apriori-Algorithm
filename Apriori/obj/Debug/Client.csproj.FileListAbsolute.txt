@@ -11,3 +11,16 @@ C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\GenerateResource
 C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\GenerateResource.write.1.tlog
 C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\Client.exe
 C:\Users\Omar\Downloads\2-Apriori Source Code\Apriori\obj\Debug\Client.pdb
+C:\Users\Omar\Desktop\Git\Apriori Source Code\Apriori\bin\Debug\Client.exe.config
+C:\Users\Omar\Desktop\Git\Apriori Source Code\Apriori\obj\Debug\Client.exe
+C:\Users\Omar\Desktop\Git\Apriori Source Code\Apriori\obj\Debug\Client.pdb
+C:\Users\Omar\Desktop\Git\Apriori Source Code\Apriori\bin\Debug\Client.exe
+C:\Users\Omar\Desktop\Git\Apriori Source Code\Apriori\bin\Debug\Client.pdb
+C:\Users\Omar\Desktop\Git\Apriori Source Code\Apriori\bin\Debug\AprioriAlgorithm.dll
+C:\Users\Omar\Desktop\Git\Apriori Source Code\Apriori\bin\Debug\AprioriAlgorithm.pdb
+C:\Users\Omar\Desktop\Git\Apriori Source Code\Apriori\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Omar\Desktop\Git\Apriori Source Code\Apriori\obj\Debug\Client.frmMain.resources
+C:\Users\Omar\Desktop\Git\Apriori Source Code\Apriori\obj\Debug\Client.frmOutput.resources
+C:\Users\Omar\Desktop\Git\Apriori Source Code\Apriori\obj\Debug\Client.Properties.Resources.resources
+C:\Users\Omar\Desktop\Git\Apriori Source Code\Apriori\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\Omar\Desktop\Git\Apriori Source Code\Apriori\obj\Debug\GenerateResource.write.1.tlog
