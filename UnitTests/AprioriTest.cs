@@ -79,10 +79,10 @@ namespace UnitTests
 
             //Assert
             Assert.AreEqual(4, actual.Count);
-            Assert.AreEqual(2, actual["a"]);
-            Assert.AreEqual(3, actual["b"]);
-            Assert.AreEqual(3, actual["c"]);
-            Assert.AreEqual(3, actual["e"]);
+            Assert.AreEqual(2, actual[0].Support);
+            Assert.AreEqual(3, actual[1].Support);
+            Assert.AreEqual(3, actual[2].Support);
+            Assert.AreEqual(3, actual[3].Support);
         }
 
         [TestMethod()]
@@ -116,12 +116,12 @@ namespace UnitTests
         public void GenerateCandidatesTest()
         {
             //Arrange
-            var frequentItems = new Dictionary<string, double> 
+            var frequentItems = new List<Item>
             {
-                {"a",2},
-                {"b",3},
-                {"c",3},
-                {"e",3}
+             new Item   {Name= "a",Support=2},
+                new Item   {Name= "b",Support=3},
+                new Item   {Name= "c",Support=3},
+                new Item   {Name= "e",Support=3},
             };
 
             //Act
@@ -193,10 +193,10 @@ namespace UnitTests
             //Assert
             Assert.AreEqual(actual.Count, 4);
 
-            Assert.AreEqual(actual["ce"], 2);
-            Assert.AreEqual(actual["be"], 3);
-            Assert.AreEqual(actual["bc"], 2);
-            Assert.AreEqual(actual["ac"], 2);
+            Assert.AreEqual(actual[0].Support, 2);
+            Assert.AreEqual(actual[1].Support, 2);
+            Assert.AreEqual(actual[2].Support, 3);
+            Assert.AreEqual(actual[3].Support, 2);
         }
 
         [TestMethod()]

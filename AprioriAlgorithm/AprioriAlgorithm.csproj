@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\Output.cs" />
     <Compile Include="Implementation\Apriori.cs" />
     <Compile Include="Contracts\IApriori.cs" />

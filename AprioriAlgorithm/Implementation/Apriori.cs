@@ -18,9 +18,10 @@
 
         Output IApriori.Solve(double minSupport, double minConfidence, IEnumerable<string> items, Dictionary<int, string> transactions)
         {
-            Dictionary<string, double> frequentItems = GetL1FrequentItems(minSupport, items, transactions);
+            IList<Item> frequentItems = GetL1FrequentItems(minSupport, items, transactions);
             Dictionary<string, double> candidates = new Dictionary<string, double>();
             double transactionsCount = transactions.Count;
+
             do
             {
                 candidates = GenerateCandidates(frequentItems, transactions);
@@ -45,20 +46,22 @@
 
         #region Private Methods
 
-        private Dictionary<string, double> GetL1FrequentItems(double minSupport, IEnumerable<string> items, Dictionary<int, string> transactions)
+        private IList<Item> GetL1FrequentItems(double minSupport, IEnumerable<string> items, Dictionary<int, string> transactions)
         {
-            var result = new Dictionary<string, double>();
+            var frequentItems = new List<Item>();
             double transactionsCount = transactions.Count;
+
             foreach (var item in items)
             {
-                double dSupport = GetSupport(item, transactions);
-                if ((dSupport / transactionsCount >= minSupport))
+                double support = GetSupport(item, transactions);
+                if ((support / transactionsCount >= minSupport))
                 {
-                    result.Add(item, dSupport);
-                    _allFrequentItems.Add(item, dSupport);
+                    frequentItems.Add(new Item { Name = item, Support = support });
+                    _allFrequentItems.Add(item, support);
                 }
             }
-            return result;
+
+            return frequentItems;
         }
 
         private double GetSupport(string strGeneratedCandidate, Dictionary<int, string> transactions)
@@ -86,18 +89,19 @@
             return true;
         }
 
-        private Dictionary<string, double> GenerateCandidates(Dictionary<string, double> frequentItems, Dictionary<int, string> transactions)
+        private Dictionary<string, double> GenerateCandidates(IList<Item> frequentItems, Dictionary<int, string> transactions)
         {
             Dictionary<string, double> candidates = new Dictionary<string, double>();
 
-            int i = 0;
-            foreach (var item in frequentItems.Keys)
+            for (int i = 0; i < frequentItems.Count - 1; i++)
             {
-                string firstItem = Sort(item);
+                string firstItem = Sort(frequentItems[i].Name);
+
                 for (int j = i + 1; j < frequentItems.Count; j++)
                 {
-                    string secondItem = Sort(frequentItems.Keys.ElementAt(j));
+                    string secondItem = Sort(frequentItems[j].Name);
                     string generatedCandidate = GetCandidate(firstItem, secondItem);
+
                     if (generatedCandidate != string.Empty)
                     {
                         generatedCandidate = Sort(generatedCandidate);
@@ -105,8 +109,6 @@
                         candidates.Add(generatedCandidate, dSupport);
                     }
                 }
-
-                i++;
             }
 
             return candidates;
@@ -139,20 +141,20 @@
             }
         }
 
-        private Dictionary<string, double> GetFrequentItems(Dictionary<string, double> candidates, double minSupport, double transactionsCount)
+        private IList<Item> GetFrequentItems(Dictionary<string, double> candidates, double minSupport, double transactionsCount)
         {
-            var result = new Dictionary<string, double>();
+            var FrequentItems = new List<Item>();
 
             foreach (var item in candidates)
             {
                 if ((item.Value / transactionsCount >= minSupport))
                 {
-                    result.Add(item.Key, item.Value);
+                    FrequentItems.Add(new Item { Name = item.Key, Support = item.Value });
                     _allFrequentItems.Add(item.Key, item.Value);
                 }
             }
 
-            return result;
+            return FrequentItems;
         }
 
         private Dictionary<string, Dictionary<string, double>> GetClosedItemSets(Dictionary<string, double> AllFrequentItems)
