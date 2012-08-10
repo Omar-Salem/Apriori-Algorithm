@@ -17,7 +17,7 @@ namespace Client
             InitializeComponent();
             LoadClosedItems(output.ClosedItemSets);
             lb_maximal.DataSource = output.MaximalItemSets;
-            LoadFrequentItems(output.AllFrequentItems);
+            LoadFrequentItems(output.FrequentItems);
             LoadRules(output.StrongRules);
         }
 
@@ -29,7 +29,7 @@ namespace Client
             }
         }
 
-        private void LoadRules(List<Rule> lstStrongRules)
+        private void LoadRules(IList<Rule> lstStrongRules)
         {
             foreach (Rule Rule in lstStrongRules)
             {

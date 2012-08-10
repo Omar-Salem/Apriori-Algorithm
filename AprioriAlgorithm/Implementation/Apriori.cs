@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
     public class Apriori : IApriori
     {
@@ -29,16 +28,17 @@
             }
             while (candidates.Count != 0);
 
-            Dictionary<string, Dictionary<string, double>> closedItemSets = GetClosedItemSets(_allFrequentItems);
-            List<string> maximalItemSets = GetMaximalItemSets(closedItemSets);
-            List<Rule> rules = GenerateRules();
-            List<Rule> strongRules = GetStrongRules(minConfidence, rules);
+            var closedItemSets = GetClosedItemSets();
+            var maximalItemSets = GetMaximalItemSets(closedItemSets);
+            var rules = GenerateRules();
+            var strongRules = GetStrongRules(minConfidence, rules);
+
             return new Output
             {
                 StrongRules = strongRules,
                 MaximalItemSets = maximalItemSets,
                 ClosedItemSets = closedItemSets,
-                AllFrequentItems = _allFrequentItems
+                FrequentItems = _allFrequentItems
             };
         } 
 
@@ -48,25 +48,27 @@
 
         private IList<Item> GetL1FrequentItems(double minSupport, IEnumerable<string> items, Dictionary<int, string> transactions)
         {
-            var frequentItems = new List<Item>();
+            var frequentItemsL1 = new List<Item>();
             double transactionsCount = transactions.Count;
 
             foreach (var item in items)
             {
                 double support = GetSupport(item, transactions);
+
                 if ((support / transactionsCount >= minSupport))
                 {
-                    frequentItems.Add(new Item { Name = item, Support = support });
+                    frequentItemsL1.Add(new Item { Name = item, Support = support });
                     _allFrequentItems.Add(item, support);
                 }
             }
 
-            return frequentItems;
+            return frequentItemsL1;
         }
 
         private double GetSupport(string strGeneratedCandidate, Dictionary<int, string> transactions)
         {
             double support = 0;
+
             foreach (string transaction in transactions.Values)
             {
                 if (CheckIsSubset(strGeneratedCandidate, transaction))
@@ -74,6 +76,7 @@
                     support++;
                 }
             }
+
             return support;
         }
 
@@ -86,6 +89,7 @@
                     return false;
                 }
             }
+
             return true;
         }
 
@@ -116,7 +120,6 @@
 
         private string Sort(string token)
         {
-            // Convert to char array, then sort and return
             char[] tokenArray = token.ToCharArray();
             Array.Sort(tokenArray);
             return new string(tokenArray);
@@ -125,6 +128,7 @@
         private string GetCandidate(string firstItem, string secondItem)
         {
             int length = firstItem.Length;
+
             if (length == 1)
             {
                 return firstItem + secondItem;
@@ -133,92 +137,106 @@
             {
                 string firstSubString = firstItem.Substring(0, length - 1);
                 string secondSubString = secondItem.Substring(0, length - 1);
+
                 if (firstSubString == secondSubString)
                 {
                     return firstItem + secondItem[length - 1];
                 }
+
                 return string.Empty;
             }
         }
 
         private IList<Item> GetFrequentItems(Dictionary<string, double> candidates, double minSupport, double transactionsCount)
         {
-            var FrequentItems = new List<Item>();
+            var frequentItems = new List<Item>();
 
             foreach (var item in candidates)
             {
                 if ((item.Value / transactionsCount >= minSupport))
                 {
-                    FrequentItems.Add(new Item { Name = item.Key, Support = item.Value });
+                    frequentItems.Add(new Item { Name = item.Key, Support = item.Value });
                     _allFrequentItems.Add(item.Key, item.Value);
                 }
             }
 
-            return FrequentItems;
+            return frequentItems;
         }
 
-        private Dictionary<string, Dictionary<string, double>> GetClosedItemSets(Dictionary<string, double> AllFrequentItems)
+        private Dictionary<string, Dictionary<string, double>> GetClosedItemSets()
         {
-            var result = new Dictionary<string, Dictionary<string, double>>();
+            var closedItemSets = new Dictionary<string, Dictionary<string, double>>();
             int i = 0;
-            foreach (var item in AllFrequentItems)
+
+            foreach (var item in _allFrequentItems)
             {
-                var parents = GetItemParents(item.Key, i + 1, AllFrequentItems);
-                if (IsClosed(item.Key, parents, AllFrequentItems))
+                var parents = GetItemParents(item.Key, i + 1);
+
+                if (CheckIsClosed(item.Key, parents))
                 {
-                    result.Add(item.Key, parents);
+                    closedItemSets.Add(item.Key, parents);
                 }
+
                 i++;
             }
-            return result;
+
+            return closedItemSets;
         }
 
-        private Dictionary<string, double> GetItemParents(string child, int index, Dictionary<string, double> AllFrequentItems)
+        private Dictionary<string, double> GetItemParents(string child, int index)
         {
             var parents = new Dictionary<string, double>();
-            for (int j = index; j < AllFrequentItems.Count; j++)
+
+            for (int j = index; j < _allFrequentItems.Count; j++)
             {
-                string parent = AllFrequentItems.Keys.ElementAt(j);
+                string parent = _allFrequentItems.Keys.ElementAt(j);
+
                 if (parent.Length == child.Length + 1)
                 {
                     if (CheckIsSubset(child, parent))
                     {
-                        parents.Add(parent, AllFrequentItems[parent]);
+                        parents.Add(parent, _allFrequentItems[parent]);
                     }
                 }
             }
+
             return parents;
         }
 
-        private bool IsClosed(string child, Dictionary<string, double> parents, Dictionary<string, double> AllFrequentItems)
+        private bool CheckIsClosed(string child, Dictionary<string, double> parents)
         {
             foreach (string parent in parents.Keys)
             {
-                if (AllFrequentItems[child] == AllFrequentItems[parent])
+                if (_allFrequentItems[child] == _allFrequentItems[parent])
                 {
                     return false;
                 }
             }
+
             return true;
         }
 
-        private List<string> GetMaximalItemSets(Dictionary<string, Dictionary<string, double>> closedItemSets)
+        private IList<string> GetMaximalItemSets(Dictionary<string, Dictionary<string, double>> closedItemSets)
         {
-            List<string> maximalItemSets = new List<string>();
+            var maximalItemSets = new List<string>();
+
             foreach (string item in closedItemSets.Keys)
             {
                 var parents = closedItemSets[item];
+
                 if (parents.Count == 0)
                 {
                     maximalItemSets.Add(item);
                 }
             }
+
             return maximalItemSets;
         }
 
-        private List<Rule> GenerateRules()
+        private IList<Rule> GenerateRules()
         {
-            List<Rule> rules = new List<Rule>();
+            var rules = new List<Rule>();
+
             foreach (string item in _allFrequentItems.Keys)
             {
                 if (item.Length > 1)
@@ -227,12 +245,14 @@
                     GenerateCombination(item, maxCombinationLength, ref rules);
                 }
             }
+
             return rules;
         }
 
         private void GenerateCombination(string item, int combinationLength, ref List<Rule> rules)
         {
             int itemLength = item.Length;
+
             switch (itemLength)
             {
                 case 2:
@@ -267,6 +287,7 @@
                 int index = parent.IndexOf(child[i]);
                 parent = parent.Remove(index, 1);
             }
+
             return parent;
         }
 
@@ -280,6 +301,7 @@
             char lastItemCharacter = item[item.Length - 1];
 
             string newToken;
+
             if (combination.Length == combinationLength)
             {
                 if (lastTokenCharacter == lastItemCharacter)
@@ -307,14 +329,16 @@
             return (GetCombinationRecursive(newToken, item, combinationLength, ref rules));
         }
 
-        private List<Rule> GetStrongRules(double minConfidence, List<Rule> rules)
+        private IList<Rule> GetStrongRules(double minConfidence, IList<Rule> rules)
         {
-            List<Rule> strongRules = new List<Rule>();
+            var strongRules = new List<Rule>();
+
             foreach (Rule rule in rules)
             {
                 string XY = Sort(rule.X + rule.Y);
                 AddStrongRule(rule, XY, ref strongRules, minConfidence);
             }
+
             strongRules.Sort();
             return strongRules;
         }
@@ -322,12 +346,15 @@
         private void AddStrongRule(Rule rule, string XY, ref List<Rule> strongRules, double minConfidence)
         {
             double confidence = GetConfidence(rule.X, XY);
+
             if (confidence >= minConfidence)
             {
                 Rule newRule = new Rule(rule.X, rule.Y, confidence);
                 strongRules.Add(newRule);
             }
+
             confidence = GetConfidence(rule.Y, XY);
+
             if (confidence >= minConfidence)
             {
                 Rule newRule = new Rule(rule.Y, rule.X, confidence);

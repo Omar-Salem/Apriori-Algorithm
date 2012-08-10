@@ -47,16 +47,16 @@ namespace UnitTests
             Output actual = target.Solve(minSupport, minConfidence, items, transactions);
 
             //Assert
-            Assert.AreEqual(9, actual.AllFrequentItems.Count);
-            Assert.AreEqual(2, actual.AllFrequentItems["a"]);
-            Assert.AreEqual(3, actual.AllFrequentItems["b"]);
-            Assert.AreEqual(3, actual.AllFrequentItems["c"]);
-            Assert.AreEqual(3, actual.AllFrequentItems["e"]);
-            Assert.AreEqual(2, actual.AllFrequentItems["ac"]);
-            Assert.AreEqual(2, actual.AllFrequentItems["bc"]);
-            Assert.AreEqual(3, actual.AllFrequentItems["be"]);
-            Assert.AreEqual(2, actual.AllFrequentItems["ce"]);
-            Assert.AreEqual(2, actual.AllFrequentItems["bce"]);
+            Assert.AreEqual(9, actual.FrequentItems.Count);
+            Assert.AreEqual(2, actual.FrequentItems["a"]);
+            Assert.AreEqual(3, actual.FrequentItems["b"]);
+            Assert.AreEqual(3, actual.FrequentItems["c"]);
+            Assert.AreEqual(3, actual.FrequentItems["e"]);
+            Assert.AreEqual(2, actual.FrequentItems["ac"]);
+            Assert.AreEqual(2, actual.FrequentItems["bc"]);
+            Assert.AreEqual(3, actual.FrequentItems["be"]);
+            Assert.AreEqual(2, actual.FrequentItems["ce"]);
+            Assert.AreEqual(2, actual.FrequentItems["bce"]);
 
             Assert.AreEqual(4, actual.ClosedItemSets.Count);
             Assert.IsTrue(actual.ClosedItemSets.ContainsKey("c"));
@@ -198,35 +198,6 @@ namespace UnitTests
             Assert.AreEqual(actual[2].Support, 3);
             Assert.AreEqual(actual[3].Support, 2);
         }
-
-        [TestMethod()]
-        public void GetClosedItemSetsTest()
-        {
-            //Arrange
-            var allFrequentItems = new Dictionary<string, double>
-            {
-                {"a", 2},
-                {"b", 3},
-                {"c", 3},
-                {"e", 3},
-                {"ce", 2},
-                {"be", 3},
-                {"bc", 2},
-                {"ac", 2},
-                {"bce", 2}
-            };
-
-            //Act
-            var actual = target.GetClosedItemSets(allFrequentItems);
-
-            //Assert
-            Assert.AreEqual(4, actual.Count);
-
-            Assert.IsTrue(actual.ContainsKey("c"));
-            Assert.IsTrue(actual.ContainsKey("be"));
-            Assert.IsTrue(actual.ContainsKey("ac"));
-            Assert.IsTrue(actual.ContainsKey("bce"));
-        } 
 
         #endregion
     }
