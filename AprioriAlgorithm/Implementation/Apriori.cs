@@ -6,11 +6,11 @@
 
     public class Apriori : IApriori
     {
-        readonly Dictionary<string, double> _allFrequentItems;
+        private readonly IndexedDictionary _allFrequentItems;
 
         public Apriori()
         {
-            _allFrequentItems = new Dictionary<string, double>();
+            _allFrequentItems = new IndexedDictionary();
         }
 
         #region IApriori
@@ -58,7 +58,7 @@
                 if ((support / transactionsCount >= minSupport))
                 {
                     frequentItemsL1.Add(new Item { Name = item, Support = support });
-                    _allFrequentItems.Add(item, support);
+                    _allFrequentItems.Add(new Item { Name = item, Support = support });
                 }
             }
 
@@ -156,7 +156,7 @@
                 if ((item.Value / transactionsCount >= minSupport))
                 {
                     frequentItems.Add(new Item { Name = item.Key, Support = item.Value });
-                    _allFrequentItems.Add(item.Key, item.Value);
+                    _allFrequentItems.Add(new Item { Name = item.Key, Support = item.Value });
                 }
             }
 
@@ -170,14 +170,12 @@
 
             foreach (var item in _allFrequentItems)
             {
-                var parents = GetItemParents(item.Key, i + 1);
+                var parents = GetItemParents(item.Name, ++i);
 
-                if (CheckIsClosed(item.Key, parents))
+                if (CheckIsClosed(item.Name, parents))
                 {
-                    closedItemSets.Add(item.Key, parents);
+                    closedItemSets.Add(item.Name, parents);
                 }
-
-                i++;
             }
 
             return closedItemSets;
@@ -189,13 +187,13 @@
 
             for (int j = index; j < _allFrequentItems.Count; j++)
             {
-                string parent = _allFrequentItems.Keys.ElementAt(j);
+                string parent = _allFrequentItems[j].Name;
 
                 if (parent.Length == child.Length + 1)
                 {
                     if (CheckIsSubset(child, parent))
                     {
-                        parents.Add(parent, _allFrequentItems[parent]);
+                        parents.Add(parent, _allFrequentItems[parent].Support);
                     }
                 }
             }
@@ -207,7 +205,7 @@
         {
             foreach (string parent in parents.Keys)
             {
-                if (_allFrequentItems[child] == _allFrequentItems[parent])
+                if (_allFrequentItems[child].Support == _allFrequentItems[parent].Support)
                 {
                     return false;
                 }
@@ -237,12 +235,12 @@
         {
             var rules = new List<Rule>();
 
-            foreach (string item in _allFrequentItems.Keys)
+            foreach (var item in _allFrequentItems)
             {
-                if (item.Length > 1)
+                if (item.Name.Length > 1)
                 {
-                    int maxCombinationLength = item.Length / 2;
-                    GenerateCombination(item, maxCombinationLength, ref rules);
+                    int maxCombinationLength = item.Name.Length / 2;
+                    GenerateCombination(item.Name, maxCombinationLength, ref rules);
                 }
             }
 
@@ -364,8 +362,8 @@
 
         private double GetConfidence(string X, string XY)
         {
-            double support_X = _allFrequentItems[X];
-            double support_XY = _allFrequentItems[XY];
+            double support_X = _allFrequentItems[X].Support;
+            double support_XY = _allFrequentItems[XY].Support;
             return support_XY / support_X;
         }
 

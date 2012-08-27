@@ -13,6 +13,6 @@
 
         public Dictionary<string, Dictionary<string, double>> ClosedItemSets { get; set; }
 
-        public Dictionary<string, double> FrequentItems { get; set; }
+        public IndexedDictionary FrequentItems { get; set; }
     }
 }

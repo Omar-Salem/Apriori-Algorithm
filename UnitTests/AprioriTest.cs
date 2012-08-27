@@ -15,7 +15,6 @@ namespace UnitTests
         readonly IEnumerable<string> items;
         readonly Dictionary<int, string> transactions;
         readonly Apriori_Accessor target;
-        //readonly int lastTransId; 
 
         #endregion
 
@@ -48,17 +47,17 @@ namespace UnitTests
 
             //Assert
             Assert.AreEqual(9, actual.FrequentItems.Count);
-            Assert.AreEqual(2, actual.FrequentItems["a"]);
-            Assert.AreEqual(3, actual.FrequentItems["b"]);
-            Assert.AreEqual(3, actual.FrequentItems["c"]);
-            Assert.AreEqual(3, actual.FrequentItems["e"]);
-            Assert.AreEqual(2, actual.FrequentItems["ac"]);
-            Assert.AreEqual(2, actual.FrequentItems["bc"]);
-            Assert.AreEqual(3, actual.FrequentItems["be"]);
-            Assert.AreEqual(2, actual.FrequentItems["ce"]);
-            Assert.AreEqual(2, actual.FrequentItems["bce"]);
+            Assert.AreEqual(2, actual.FrequentItems["a"].Support);
+            Assert.AreEqual(3, actual.FrequentItems["b"].Support);
+            Assert.AreEqual(3, actual.FrequentItems["c"].Support);
+            Assert.AreEqual(3, actual.FrequentItems["e"].Support);
+            Assert.AreEqual(2, actual.FrequentItems["ac"].Support);
+            Assert.AreEqual(2, actual.FrequentItems["bc"].Support);
+            Assert.AreEqual(3, actual.FrequentItems["be"].Support);
+            Assert.AreEqual(2, actual.FrequentItems["ce"].Support);
+            Assert.AreEqual(2, actual.FrequentItems["bce"].Support);
 
-            Assert.AreEqual(4, actual.ClosedItemSets.Count);
+            Assert.AreEqual(4, actual.ClosedItemSets.Count, "ClosedItemSets calculation is wrong");
             Assert.IsTrue(actual.ClosedItemSets.ContainsKey("c"));
             Assert.IsTrue(actual.ClosedItemSets.ContainsKey("be"));
             Assert.IsTrue(actual.ClosedItemSets.ContainsKey("ac"));
