@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,12 +39,12 @@ namespace Client
             }
         }
 
-        private void LoadFrequentItems(Dictionary<string, double> dicFrequentItems)
+        private void LoadFrequentItems(IndexedDictionary frequentItems)
         {
-            foreach (string strItem in dicFrequentItems.Keys)
+            foreach (var Item in frequentItems)
             {
-                ListViewItem lvi = new ListViewItem(strItem);
-                lvi.SubItems.Add(dicFrequentItems[strItem].ToString());
+                ListViewItem lvi = new ListViewItem(Item.Name);
+                lvi.SubItems.Add(Item.Support.ToString());
                 lv_Frequent.Items.Add(lvi);
             }
         }
