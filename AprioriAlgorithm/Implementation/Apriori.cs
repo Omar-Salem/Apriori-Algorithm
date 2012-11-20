@@ -40,7 +40,7 @@
                 ClosedItemSets = closedItemSets,
                 FrequentItems = _allFrequentItems
             };
-        } 
+        }
 
         #endregion
 
@@ -108,7 +108,6 @@
 
                     if (generatedCandidate != string.Empty)
                     {
-                        generatedCandidate = Sort(generatedCandidate);
                         double dSupport = GetSupport(generatedCandidate, transactions);
                         candidates.Add(generatedCandidate, dSupport);
                     }
@@ -240,38 +239,38 @@
                 if (item.Name.Length > 1)
                 {
                     int maxCombinationLength = item.Name.Length / 2;
-                    GenerateCombination(item.Name, maxCombinationLength, ref rules);
+                    GenerateCombination(item.Name, maxCombinationLength, rules);
                 }
             }
 
             return rules;
         }
 
-        private void GenerateCombination(string item, int combinationLength, ref List<Rule> rules)
+        private void GenerateCombination(string item, int combinationLength, List<Rule> rules)
         {
             int itemLength = item.Length;
 
             switch (itemLength)
             {
                 case 2:
-                    AddItem(item[0].ToString(), item, ref rules);
+                    AddItem(item[0].ToString(), item, rules);
                     break;
                 case 3:
                     for (int i = 0; i < itemLength; i++)
                     {
-                        AddItem(item[i].ToString(), item, ref rules);
+                        AddItem(item[i].ToString(), item, rules);
                     }
                     break;
                 default:
                     for (int i = 0; i < itemLength; i++)
                     {
-                        GetCombinationRecursive(item[i].ToString(), item, combinationLength, ref rules);
+                        GetCombinationRecursive(item[i].ToString(), item, combinationLength, rules);
                     }
                     break;
             }
         }
 
-        private void AddItem(string combination, string item, ref List<Rule> rules)
+        private void AddItem(string combination, string item, List<Rule> rules)
         {
             string remaining = GetRemaining(combination, item);
             Rule rule = new Rule(combination, remaining, 0);
@@ -289,9 +288,9 @@
             return parent;
         }
 
-        private string GetCombinationRecursive(string combination, string item, int combinationLength, ref List<Rule> rules)
+        private string GetCombinationRecursive(string combination, string item, int combinationLength, List<Rule> rules)
         {
-            AddItem(combination, item, ref rules);
+            AddItem(combination, item, rules);
 
             char lastTokenCharacter = combination[combination.Length - 1];
             int lastTokenCharcaterIndex = combination.IndexOf(lastTokenCharacter);
@@ -324,7 +323,7 @@
                 newToken = combination + cNextCharacter;
             }
 
-            return (GetCombinationRecursive(newToken, item, combinationLength, ref rules));
+            return (GetCombinationRecursive(newToken, item, combinationLength, rules));
         }
 
         private IList<Rule> GetStrongRules(double minConfidence, IList<Rule> rules)
@@ -334,14 +333,14 @@
             foreach (Rule rule in rules)
             {
                 string XY = Sort(rule.X + rule.Y);
-                AddStrongRule(rule, XY, ref strongRules, minConfidence);
+                AddStrongRule(rule, XY, strongRules, minConfidence);
             }
 
             strongRules.Sort();
             return strongRules;
         }
 
-        private void AddStrongRule(Rule rule, string XY, ref List<Rule> strongRules, double minConfidence)
+        private void AddStrongRule(Rule rule, string XY, List<Rule> strongRules, double minConfidence)
         {
             double confidence = GetConfidence(rule.X, XY);
 

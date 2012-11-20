@@ -8,3 +8,8 @@ C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\bin\Debug\Apriori
 C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.dll
 C:\Users\Omar\Desktop\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.pdb
+D:\Git\Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.dll
+D:\Git\Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.pdb
+D:\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\ResolveAssemblyReference.cache
+D:\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.dll
+D:\Git\Apriori Source Code\AprioriAlgorithm\obj\Debug\AprioriAlgorithm.pdb

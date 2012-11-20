@@ -1,26 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AprioriAlgorithm
 {
     public class Rule : IComparable<Rule>
     {
-        string strCombination, strRemaining;
-        double _confidence;
+        string combination, remaining;
+        double confidence;
 
-        public Rule(string strCombination, string strRemaining, double Confidence)
+        public Rule(string combination, string remaining, double confidence)
         {
-            this.strCombination = strCombination;
-            this.strRemaining = strRemaining;
-            this._confidence = Confidence;
+            this.combination = combination;
+            this.remaining = remaining;
+            this.confidence = confidence;
         }
-        public string X { get { return strCombination; } }
-        public string Y { get { return strRemaining; } }
-        public double Confidence { get { return _confidence; } }
 
+        public string X { get { return combination; } }
 
+        public string Y { get { return remaining; } }
+
+        public double Confidence { get { return confidence; } }
 
         #region IComparable<clssRules> Members
 
