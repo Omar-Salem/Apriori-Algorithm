@@ -29,11 +29,6 @@
 
         Output IApriori.ProcessTransaction(double minSupport, double minConfidence, IEnumerable<string> items, string[] transactions)
         {
-            //for (int i = 0; i < transactions.Length; i++)
-            //{
-            //    transactions[i] = _sorter.Sort(transactions[i]);
-            //}
-
             IList<Item> frequentItems = GetL1FrequentItems(minSupport, items, transactions);
             IDictionary<string, double> candidates = new Dictionary<string, double>();
             double transactionsCount = transactions.Count();
