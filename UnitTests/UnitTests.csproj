@@ -35,14 +35,22 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\References\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -50,14 +58,21 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AprioriTest.cs" />
+    <Compile Include="AprioriAlgorithm Tests\AprioriTest.cs" />
+    <Compile Include="UI Tests\CharacterOnlyRuleTest.cs" />
+    <Compile Include="UI Tests\MainViewModelTest.cs" />
+    <Compile Include="ObservableSetTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SorterTest.cs" />
+    <Compile Include="AprioriAlgorithm Tests\SorterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AprioriAlgorithm\AprioriAlgorithm.csproj">
       <Project>{49F14BB7-E49E-4574-8038-25ABB6D5CF46}</Project>
       <Name>AprioriAlgorithm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPFClient\WPFClient.csproj">
+      <Project>{B20F3B49-50C0-4160-BA1B-87FDF077CD79}</Project>
+      <Name>WPFClient</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

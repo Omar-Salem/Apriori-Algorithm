@@ -12,7 +12,7 @@
 
         public Dictionary<string, Dictionary<string, double>> ClosedItemSets { get; set; }
 
-        public IndexedDictionary FrequentItems { get; set; } 
+        public ItemsDictionary FrequentItems { get; set; } 
 
         #endregion
     }

@@ -25,3 +25,8 @@ D:\Git\Apriori Source Code\UnitTests\bin\Debug\AprioriAlgorithm_Accessor.pdb
 D:\Git\Apriori Source Code\UnitTests\obj\Debug\ResolveAssemblyReference.cache
 D:\Git\Apriori Source Code\UnitTests\obj\Debug\UnitTests.dll
 D:\Git\Apriori Source Code\UnitTests\obj\Debug\UnitTests.pdb
+D:\Git\Apriori Source Code\UnitTests\bin\Debug\WPFClient.exe
+D:\Git\Apriori Source Code\UnitTests\bin\Debug\WPFClient.pdb
+D:\Git\Apriori Source Code\UnitTests\bin\Debug\Moq.dll
+D:\Git\Apriori Source Code\UnitTests\bin\Debug\Moq.pdb
+D:\Git\Apriori Source Code\UnitTests\bin\Debug\Moq.xml

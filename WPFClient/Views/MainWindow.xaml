@@ -1,0 +1,94 @@
+﻿<Window x:Class="WPFClient.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFClient"
+       Title="Apriori Demo" Height="531" Width="525" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ControlTemplate x:Key="validationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+              Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                              Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <GroupBox Header="Items" Height="198" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="479">
+            <Grid>
+                <StackPanel Margin="0,0,0,-139">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Item" Height="28" Name="label1" />
+                        <TextBox Height="23" Width="120" MaxLength="1" Validation.ErrorTemplate="{StaticResource validationTemplate}">
+                            <TextBox.Text>
+                                <Binding Path="NewItem" UpdateSourceTrigger="PropertyChanged" >
+                                    <Binding.ValidationRules>
+                                        <local:CharacterOnlyRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <Button Content="Add Item" Height="23" Name="button1" Width="75" Command="{Binding AddItem}"/>
+                        <Label Content="{Binding Error}"  Height="28" Name="label4" Foreground="Red" />
+                    </StackPanel>
+
+                    <Button Content="Remove Items" Height="23" Name="button2" Width="75" Command="{Binding RemoveItem}"/>
+                    <DataGrid AutoGenerateColumns="False" Name="dataGrid1" Width="80" SelectedItem="{Binding SelectedItem}"  ItemsSource="{Binding Items}" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding Path=Selected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=Name}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Add Transaction" Height="23" Name="button6" Width="120" Command="{Binding AddTransaction}"  />
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Transactions" Height="121" HorizontalAlignment="Left" Margin="12,230,0,0" Name="groupBox2" VerticalAlignment="Top" Width="473">
+            <Grid >
+                <StackPanel Orientation="Horizontal">
+
+                    <ListBox Height="100" Name="transactionslistBox" Width="120" ItemsSource="{Binding Transactions}" SelectedItem="{Binding Path=SelectedTransaction}"/>
+                    <StackPanel >
+                        <Button Content="Delete Transaction" Height="23" Name="button3" Width="120" Command="{Binding DeleteTransaction}"/>
+                        <Button Content="Clear All Transactions" Height="23" Name="button4" Width="120" Command="{Binding ClearAllTransactions}"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="" Height="123" HorizontalAlignment="Left" Margin="18,357,0,0" Name="groupBox3" VerticalAlignment="Top" Width="461">
+            <Grid >
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="min. Support " Height="28"/>
+                        <Label Content="{Binding MinSupport}" Height="28"/>
+                        <Label Content=" %" Height="28"/>
+
+                        <Slider Height="23" Name="slider1" Width="300" Minimum="1" Maximum="100" Value="{Binding MinSupport}" IsSnapToTickEnabled="True" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="min. Confidence %" Height="28" />
+                        <Label Content="{Binding MinConfidence}" Height="28"/>
+                        <Label Content=" %" Height="28"/>
+                        <Slider Height="23" Name="slider2" Width="300" Minimum="1" Maximum="100" Value="{Binding MinConfidence}" IsSnapToTickEnabled="True" />
+                    </StackPanel>
+                    <Button Content="Process Transactions" Height="23" Name="button5" Width="120
+                            " Command="{Binding ProcessTransactions}"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

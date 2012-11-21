@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="f9310308-007e-42e7-9c3c-f54584112111" name="Omar@OMAR-PC 2012-11-21 21:43:55" runUser="Omar-PC\Omar" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="eef0e273-97f3-4062-8c3f-615cccc566c4">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment enabled="false" runDeploymentRoot="Omar_OMAR-PC 2012-11-21 21_43_55">
+      <DeploymentItem filename="D:\Git\Apriori Source Code\WPFClient\bin\Debug\WPFClient.exe" />
+      <DeploymentItem filename="D:\Git\Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.dll" />
+      <DeploymentItem filename="D:\Git\Apriori Source Code\References\Moq.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2012-11-21T21:43:55.1105873+02:00" queuing="2012-11-21T21:43:55.3376003+02:00" start="2012-11-21T21:43:55.4466066+02:00" finish="2012-11-21T21:43:56.1576472+02:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="RemoveItem_SelectedItemIsNullTest" storage="d:\git\apriori source code\unittests\bin\debug\unittests.dll" id="2b3c7cec-d5d9-d973-b880-026150407f7e">
+      <Execution id="55d114ed-3573-4056-bea1-7f46bf2489ed" />
+      <TestMethod codeBase="D:/Git/Apriori Source Code/UnitTests/bin/Debug/UnitTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTests.MainViewModelTest, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="RemoveItem_SelectedItemIsNullTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="2b3c7cec-d5d9-d973-b880-026150407f7e" executionId="55d114ed-3573-4056-bea1-7f46bf2489ed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="55d114ed-3573-4056-bea1-7f46bf2489ed" testId="2b3c7cec-d5d9-d973-b880-026150407f7e" testName="RemoveItem_SelectedItemIsNullTest" computerName="OMAR-PC" duration="00:00:00.3445608" startTime="2012-11-21T21:43:55.4526069+02:00" endTime="2012-11-21T21:43:56.1306457+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="55d114ed-3573-4056-bea1-7f46bf2489ed">
+    </UnitTestResult>
+  </Results>
+</TestRun>

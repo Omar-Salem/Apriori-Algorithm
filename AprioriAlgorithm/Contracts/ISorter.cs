@@ -1,4 +1,5 @@
-﻿namespace AprioriAlgorithm
+﻿using System.Collections.Generic;
+namespace AprioriAlgorithm
 {
     interface ISorter
     {

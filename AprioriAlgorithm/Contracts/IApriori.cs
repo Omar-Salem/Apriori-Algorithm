@@ -4,6 +4,6 @@
 
     public interface IApriori
     {
-        Output ProcessTransaction(double minSupport, double minConfidence, IEnumerable<string> items, IDictionary<int, string> transactions);
+        Output ProcessTransaction(double minSupport, double minConfidence, IEnumerable<string> items, string[] transactions);
     }
 }

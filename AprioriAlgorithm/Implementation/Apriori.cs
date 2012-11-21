@@ -10,8 +10,8 @@
     {
         #region Member Variables
 
-        readonly IndexedDictionary _allFrequentItems;
-        readonly ISorter _sorter; 
+        readonly ItemsDictionary _allFrequentItems;
+        readonly ISorter _sorter;
 
         #endregion
 
@@ -19,19 +19,24 @@
 
         public Apriori()
         {
-            _allFrequentItems = new IndexedDictionary();
+            _allFrequentItems = new ItemsDictionary();
             _sorter = ContainerProvider.Container.GetExportedValue<ISorter>();
-        } 
+        }
 
         #endregion
 
         #region IApriori
 
-        Output IApriori.ProcessTransaction(double minSupport, double minConfidence, IEnumerable<string> items, IDictionary<int, string> transactions)
+        Output IApriori.ProcessTransaction(double minSupport, double minConfidence, IEnumerable<string> items, string[] transactions)
         {
+            //for (int i = 0; i < transactions.Length; i++)
+            //{
+            //    transactions[i] = _sorter.Sort(transactions[i]);
+            //}
+
             IList<Item> frequentItems = GetL1FrequentItems(minSupport, items, transactions);
             IDictionary<string, double> candidates = new Dictionary<string, double>();
-            double transactionsCount = transactions.Count;
+            double transactionsCount = transactions.Count();
 
             do
             {
@@ -58,10 +63,10 @@
 
         #region Private Methods
 
-        private List<Item> GetL1FrequentItems(double minSupport, IEnumerable<string> items, IDictionary<int, string> transactions)
+        private List<Item> GetL1FrequentItems(double minSupport, IEnumerable<string> items, IEnumerable<string> transactions)
         {
             var frequentItemsL1 = new List<Item>();
-            double transactionsCount = transactions.Count;
+            double transactionsCount = transactions.Count();
 
             foreach (var item in items)
             {
@@ -73,15 +78,15 @@
                     _allFrequentItems.Add(new Item { Name = item, Support = support });
                 }
             }
-
+            frequentItemsL1.Sort();
             return frequentItemsL1;
         }
 
-        private double GetSupport(string generatedCandidate, IDictionary<int, string> transactions)
+        private double GetSupport(string generatedCandidate, IEnumerable<string> transactions)
         {
             double support = 0;
 
-            foreach (string transaction in transactions.Values)
+            foreach (string transaction in transactions)
             {
                 if (CheckIsSubset(generatedCandidate, transaction))
                 {
@@ -105,7 +110,7 @@
             return true;
         }
 
-        private Dictionary<string, double> GenerateCandidates(IList<Item> frequentItems, IDictionary<int, string> transactions)
+        private Dictionary<string, double> GenerateCandidates(IList<Item> frequentItems, IEnumerable<string> transactions)
         {
             Dictionary<string, double> candidates = new Dictionary<string, double>();
 

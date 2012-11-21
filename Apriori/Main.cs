@@ -274,6 +274,5 @@ namespace Client
         }
 
         #endregion
-
     }
 }

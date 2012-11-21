@@ -1,0 +1,42 @@
+﻿<Window x:Class="WPFClient.Result"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Result" Height="300" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <WrapPanel>
+            <StackPanel>
+                <Label Content="Frequent Items" Height="28" Name="label1" />
+                <ListBox Height="100" Name="listBox1" Width="120" ItemsSource="{Binding FrequentItems}" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}"></Label>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Closed Items" Height="28"  />
+                <ListBox Height="100" Width="120" ItemsSource="{Binding ClosedItemSets.Keys}" >
+                </ListBox>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Maximal Items" Height="28"  />
+                <ListBox Height="100" Width="120" ItemsSource="{Binding MaximalItemSets}" />
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Strong Rules" Height="28"  />
+                <ListBox Height="100" Width="120" ItemsSource="{Binding StrongRules}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding X}"></Label>
+                                <Label Content="--->"></Label>
+                                <Label Content="{Binding Y}"></Label>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </WrapPanel>
+    </Grid>
+</Window>

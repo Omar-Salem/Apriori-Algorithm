@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="1da9cb04-4471-40f0-82fa-50301d2adb1a" name="Omar@OMAR-PC 2012-11-21 21:44:03" runUser="Omar-PC\Omar" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="eef0e273-97f3-4062-8c3f-615cccc566c4">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment userDeploymentRoot="D:\Git\Apriori Source Code\TestResults" useDefaultDeploymentRoot="false" enabled="false" runDeploymentRoot="Omar_OMAR-PC 2012-11-21 21_44_03">
+      <DeploymentItem filename="D:\Git\Apriori Source Code\WPFClient\bin\Debug\WPFClient.exe" />
+      <DeploymentItem filename="D:\Git\Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.dll" />
+      <DeploymentItem filename="D:\Git\Apriori Source Code\References\Moq.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2012-11-21T21:44:03.3020559+02:00" queuing="2012-11-21T21:44:05.4251773+02:00" start="2012-11-21T21:44:05.8061991+02:00" finish="2012-11-21T21:44:24.1552486+02:00" />
+  <ResultSummary outcome="Error">
+    <Counters total="1" executed="1" error="0" failed="0" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="OMAR-PC" outcome="Error" timestamp="2012-11-21T21:44:24.1482482+02:00">
+        <Text>Test host process exited unexpectedly.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="RemoveItem_SelectedItemIsNullTest" storage="d:\git\apriori source code\unittests\bin\debug\unittests.dll" id="2b3c7cec-d5d9-d973-b880-026150407f7e">
+      <Execution id="c5a85bd9-ea71-4fa6-8c6a-66fb7f7228b4" />
+      <TestMethod codeBase="D:/Git/Apriori Source Code/UnitTests/bin/Debug/UnitTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTests.MainViewModelTest, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="RemoveItem_SelectedItemIsNullTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="2b3c7cec-d5d9-d973-b880-026150407f7e" executionId="c5a85bd9-ea71-4fa6-8c6a-66fb7f7228b4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="c5a85bd9-ea71-4fa6-8c6a-66fb7f7228b4" testId="2b3c7cec-d5d9-d973-b880-026150407f7e" testName="RemoveItem_SelectedItemIsNullTest" computerName="OMAR-PC" duration="00:00:17.9980294" startTime="2012-11-21T21:44:06.1562191+02:00" endTime="2012-11-21T21:44:24.1542485+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c5a85bd9-ea71-4fa6-8c6a-66fb7f7228b4">
+    </UnitTestResult>
+  </Results>
+</TestRun>
