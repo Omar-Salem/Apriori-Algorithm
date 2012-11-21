@@ -1,24 +1,36 @@
 ﻿namespace AprioriAlgorithm
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.ComponentModel.Composition;
+    using System.Text;
 
+    [Export(typeof(IApriori))]
     public class Apriori : IApriori
     {
-        private readonly IndexedDictionary _allFrequentItems;
+        #region Member Variables
+
+        readonly IndexedDictionary _allFrequentItems;
+        readonly ISorter _sorter; 
+
+        #endregion
+
+        #region Constructor
 
         public Apriori()
         {
             _allFrequentItems = new IndexedDictionary();
-        }
+            _sorter = ContainerProvider.Container.GetExportedValue<ISorter>();
+        } 
+
+        #endregion
 
         #region IApriori
 
-        Output IApriori.Solve(double minSupport, double minConfidence, IEnumerable<string> items, Dictionary<int, string> transactions)
+        Output IApriori.ProcessTransaction(double minSupport, double minConfidence, IEnumerable<string> items, IDictionary<int, string> transactions)
         {
             IList<Item> frequentItems = GetL1FrequentItems(minSupport, items, transactions);
-            Dictionary<string, double> candidates = new Dictionary<string, double>();
+            IDictionary<string, double> candidates = new Dictionary<string, double>();
             double transactionsCount = transactions.Count;
 
             do
@@ -28,10 +40,10 @@
             }
             while (candidates.Count != 0);
 
-            var closedItemSets = GetClosedItemSets();
-            var maximalItemSets = GetMaximalItemSets(closedItemSets);
             var rules = GenerateRules();
             var strongRules = GetStrongRules(minConfidence, rules);
+            var closedItemSets = GetClosedItemSets();
+            var maximalItemSets = GetMaximalItemSets(closedItemSets);
 
             return new Output
             {
@@ -46,7 +58,7 @@
 
         #region Private Methods
 
-        private IList<Item> GetL1FrequentItems(double minSupport, IEnumerable<string> items, Dictionary<int, string> transactions)
+        private List<Item> GetL1FrequentItems(double minSupport, IEnumerable<string> items, IDictionary<int, string> transactions)
         {
             var frequentItemsL1 = new List<Item>();
             double transactionsCount = transactions.Count;
@@ -55,7 +67,7 @@
             {
                 double support = GetSupport(item, transactions);
 
-                if ((support / transactionsCount >= minSupport))
+                if (support / transactionsCount >= minSupport)
                 {
                     frequentItemsL1.Add(new Item { Name = item, Support = support });
                     _allFrequentItems.Add(new Item { Name = item, Support = support });
@@ -65,13 +77,13 @@
             return frequentItemsL1;
         }
 
-        private double GetSupport(string strGeneratedCandidate, Dictionary<int, string> transactions)
+        private double GetSupport(string generatedCandidate, IDictionary<int, string> transactions)
         {
             double support = 0;
 
             foreach (string transaction in transactions.Values)
             {
-                if (CheckIsSubset(strGeneratedCandidate, transaction))
+                if (CheckIsSubset(generatedCandidate, transaction))
                 {
                     support++;
                 }
@@ -93,23 +105,23 @@
             return true;
         }
 
-        private Dictionary<string, double> GenerateCandidates(IList<Item> frequentItems, Dictionary<int, string> transactions)
+        private Dictionary<string, double> GenerateCandidates(IList<Item> frequentItems, IDictionary<int, string> transactions)
         {
             Dictionary<string, double> candidates = new Dictionary<string, double>();
 
             for (int i = 0; i < frequentItems.Count - 1; i++)
             {
-                string firstItem = Sort(frequentItems[i].Name);
+                string firstItem = _sorter.Sort(frequentItems[i].Name);
 
                 for (int j = i + 1; j < frequentItems.Count; j++)
                 {
-                    string secondItem = Sort(frequentItems[j].Name);
-                    string generatedCandidate = GetCandidate(firstItem, secondItem);
+                    string secondItem = _sorter.Sort(frequentItems[j].Name);
+                    string generatedCandidate = GenerateCandidate(firstItem, secondItem);
 
                     if (generatedCandidate != string.Empty)
                     {
-                        double dSupport = GetSupport(generatedCandidate, transactions);
-                        candidates.Add(generatedCandidate, dSupport);
+                        double support = GetSupport(generatedCandidate, transactions);
+                        candidates.Add(generatedCandidate, support);
                     }
                 }
             }
@@ -117,14 +129,7 @@
             return candidates;
         }
 
-        private string Sort(string token)
-        {
-            char[] tokenArray = token.ToCharArray();
-            Array.Sort(tokenArray);
-            return new string(tokenArray);
-        }
-
-        private string GetCandidate(string firstItem, string secondItem)
+        private string GenerateCandidate(string firstItem, string secondItem)
         {
             int length = firstItem.Length;
 
@@ -146,13 +151,13 @@
             }
         }
 
-        private IList<Item> GetFrequentItems(Dictionary<string, double> candidates, double minSupport, double transactionsCount)
+        private List<Item> GetFrequentItems(IDictionary<string, double> candidates, double minSupport, double transactionsCount)
         {
             var frequentItems = new List<Item>();
 
             foreach (var item in candidates)
             {
-                if ((item.Value / transactionsCount >= minSupport))
+                if (item.Value / transactionsCount >= minSupport)
                 {
                     frequentItems.Add(new Item { Name = item.Key, Support = item.Value });
                     _allFrequentItems.Add(new Item { Name = item.Key, Support = item.Value });
@@ -230,51 +235,69 @@
             return maximalItemSets;
         }
 
-        private IList<Rule> GenerateRules()
+        private HashSet<Rule> GenerateRules()
         {
-            var rules = new List<Rule>();
+            var rulesList = new HashSet<Rule>();
 
             foreach (var item in _allFrequentItems)
             {
                 if (item.Name.Length > 1)
                 {
-                    int maxCombinationLength = item.Name.Length / 2;
-                    GenerateCombination(item.Name, maxCombinationLength, rules);
+                    IEnumerable<string> subsetsList = GenerateSubsets(item.Name);
+
+                    foreach (var subset in subsetsList)
+                    {
+                        string remaining = GetRemaining(subset, item.Name);
+                        Rule rule = new Rule(subset, remaining, 0);
+
+                        if (!rulesList.Contains(rule))
+                        {
+                            rulesList.Add(rule);
+                        }
+                    }
                 }
             }
 
-            return rules;
+            return rulesList;
         }
 
-        private void GenerateCombination(string item, int combinationLength, List<Rule> rules)
+        private IEnumerable<string> GenerateSubsets(string item)
         {
-            int itemLength = item.Length;
+            IEnumerable<string> allSubsets = new string[] { };
+            int subsetLength = item.Length / 2;
 
-            switch (itemLength)
+            for (int i = 1; i <= subsetLength; i++)
             {
-                case 2:
-                    AddItem(item[0].ToString(), item, rules);
-                    break;
-                case 3:
-                    for (int i = 0; i < itemLength; i++)
-                    {
-                        AddItem(item[i].ToString(), item, rules);
-                    }
-                    break;
-                default:
-                    for (int i = 0; i < itemLength; i++)
-                    {
-                        GetCombinationRecursive(item[i].ToString(), item, combinationLength, rules);
-                    }
-                    break;
+                IList<string> subsets = new List<string>();
+                GenerateSubsetsRecursive(item, i, new char[item.Length], subsets);
+                allSubsets = allSubsets.Concat(subsets);
             }
+
+            return allSubsets;
         }
 
-        private void AddItem(string combination, string item, List<Rule> rules)
+        private void GenerateSubsetsRecursive(string item, int subsetLength, char[] temp, IList<string> subsets, int q = 0, int r = 0)
         {
-            string remaining = GetRemaining(combination, item);
-            Rule rule = new Rule(combination, remaining, 0);
-            rules.Add(rule);
+            if (q == subsetLength)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                for (int i = 0; i < subsetLength; i++)
+                {
+                    sb.Append(temp[i]);
+                }
+
+                subsets.Add(sb.ToString());
+            }
+
+            else
+            {
+                for (int i = r; i < item.Length; i++)
+                {
+                    temp[q] = item[i];
+                    GenerateSubsetsRecursive(item, subsetLength, temp, subsets, q + 1, i + 1);
+                }
+            }
         }
 
         private string GetRemaining(string child, string parent)
@@ -288,52 +311,14 @@
             return parent;
         }
 
-        private string GetCombinationRecursive(string combination, string item, int combinationLength, List<Rule> rules)
-        {
-            AddItem(combination, item, rules);
-
-            char lastTokenCharacter = combination[combination.Length - 1];
-            int lastTokenCharcaterIndex = combination.IndexOf(lastTokenCharacter);
-            int lastTokenCharcaterIndexInParent = item.IndexOf(lastTokenCharacter);
-            char lastItemCharacter = item[item.Length - 1];
-
-            string newToken;
-
-            if (combination.Length == combinationLength)
-            {
-                if (lastTokenCharacter == lastItemCharacter)
-                {
-                    return string.Empty;
-
-                }
-
-                combination = combination.Remove(lastTokenCharcaterIndex, 1);
-                char nextCharacter = item[lastTokenCharcaterIndexInParent + 1];
-                newToken = combination + nextCharacter;
-
-            }
-            else
-            {
-                if (combination != lastItemCharacter.ToString())
-                {
-                    return string.Empty;
-                }
-
-                char cNextCharacter = item[lastTokenCharcaterIndexInParent + 1];
-                newToken = combination + cNextCharacter;
-            }
-
-            return (GetCombinationRecursive(newToken, item, combinationLength, rules));
-        }
-
-        private IList<Rule> GetStrongRules(double minConfidence, IList<Rule> rules)
+        private IList<Rule> GetStrongRules(double minConfidence, HashSet<Rule> rules)
         {
             var strongRules = new List<Rule>();
 
             foreach (Rule rule in rules)
             {
-                string XY = Sort(rule.X + rule.Y);
-                AddStrongRule(rule, XY, strongRules, minConfidence);
+                string xy = _sorter.Sort(rule.X + rule.Y);
+                AddStrongRule(rule, xy, strongRules, minConfidence);
             }
 
             strongRules.Sort();
@@ -361,9 +346,9 @@
 
         private double GetConfidence(string X, string XY)
         {
-            double support_X = _allFrequentItems[X].Support;
-            double support_XY = _allFrequentItems[XY].Support;
-            return support_XY / support_X;
+            double supportX = _allFrequentItems[X].Support;
+            double supportXY = _allFrequentItems[XY].Support;
+            return supportXY / supportX;
         }
 
         #endregion

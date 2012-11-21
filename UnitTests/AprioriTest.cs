@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace UnitTests
 {
@@ -10,40 +11,43 @@ namespace UnitTests
     {
         #region Member Variables
 
-        readonly double minSupport;
-        readonly double minConfidence;
-        readonly IEnumerable<string> items;
-        readonly Dictionary<int, string> transactions;
-        readonly Apriori_Accessor target;
+        readonly double _minSupport;
+        readonly double _minConfidence;
+        readonly IEnumerable<string> _items;
+        readonly Dictionary<int, string> _transactions;
+        readonly Apriori_Accessor _target;
 
         #endregion
 
+        #region  Constructor
+
         public AprioriTest()
         {
-            minSupport = .5;
-            minConfidence = .8;
-            items = new string[5] { "a", "b", "c", "d", "e" };
-            transactions = new Dictionary<int, string>
+            _minSupport = .5;
+            _minConfidence = .8;
+            _items = new string[5] { "a", "b", "c", "d", "e" };
+            _transactions = new Dictionary<int, string>
             {
                 {1,"acd"},
                 {2,"bce"},
                 {3,"abce"},
                 {4,"be"}
             };
-            target = new Apriori_Accessor();
+            _target = new Apriori_Accessor();
         }
+
+        #endregion
 
         #region Test Methods
 
         [TestMethod()]
-        public void SolveTest()
+        public void ProcessTransactionTest()
         {
             //Arrange
             IApriori target = new Apriori();
 
-
             //Act
-            Output actual = target.Solve(minSupport, minConfidence, items, transactions);
+            Output actual = target.ProcessTransaction(_minSupport, _minConfidence, _items, _transactions);
 
             //Assert
             Assert.AreEqual(9, actual.FrequentItems.Count);
@@ -74,7 +78,7 @@ namespace UnitTests
         public void GetL1FrequentItemsTest()
         {
             //Act
-            var actual = target.GetL1FrequentItems(minSupport, items, transactions);
+            var actual = _target.GetL1FrequentItems(_minSupport, _items, _transactions);
 
             //Assert
             Assert.AreEqual(4, actual.Count);
@@ -91,7 +95,7 @@ namespace UnitTests
             string candidate = "a";
 
             //Act
-            var actual = target.GetSupport(candidate, transactions);
+            var actual = _target.GetSupport(candidate, _transactions);
 
             //Assert
             Assert.AreEqual(2, actual);
@@ -105,7 +109,7 @@ namespace UnitTests
             string parent = "abcde";
 
             //Act
-            var actual = target.CheckIsSubset(child, parent);
+            var actual = _target.CheckIsSubset(child, parent);
 
             //Assert
             Assert.IsTrue(actual);
@@ -124,7 +128,7 @@ namespace UnitTests
             };
 
             //Act
-            var actual = target.GenerateCandidates(frequentItems, transactions);
+            var actual = _target.GenerateCandidates(frequentItems, _transactions);
 
             //Assert
             Assert.AreEqual(actual.Count, 6);
@@ -138,35 +142,30 @@ namespace UnitTests
         }
 
         [TestMethod()]
-        public void AlphabetizeTest()
-        {
-            //Arrange
-            var token = "cba";
-
-            //Act
-            var actual = target.Sort(token);
-
-            //Assert
-            Assert.AreEqual(actual, "abc");
-        }
-
-        [TestMethod()]
-        public void GetCandidateTest()
+        public void GenerateCandidate_SameFirstElementTest()
         {
             //Act
-            var actual = target.GetCandidate("be", "bc");
+            var actual = _target.GenerateCandidate("be", "bc");
 
             //Assert
             Assert.AreEqual(actual, "bec");
+        }
 
+        [TestMethod()]
+        public void GenerateCandidate_SingleElementsTest()
+        {
             //Act
-            actual = target.GetCandidate("a", "b");
+            var actual = _target.GenerateCandidate("a", "b");
 
             //Assert
             Assert.AreEqual(actual, "ab");
+        }
 
+        [TestMethod()]
+        public void GenerateCandidate_DifferentFirstElementTest()
+        {
             //Act
-            actual = target.GetCandidate("ce", "be");
+            var actual = _target.GenerateCandidate("ce", "be");
 
             //Assert
             Assert.AreEqual(actual, string.Empty);
@@ -187,7 +186,7 @@ namespace UnitTests
             };
 
             //Act
-            var actual = target.GetFrequentItems(candidates, minSupport, transactions.Count);
+            var actual = _target.GetFrequentItems(candidates, _minSupport, _transactions.Count);
 
             //Assert
             Assert.AreEqual(actual.Count, 4);
@@ -196,6 +195,42 @@ namespace UnitTests
             Assert.AreEqual(actual[1].Support, 2);
             Assert.AreEqual(actual[2].Support, 3);
             Assert.AreEqual(actual[3].Support, 2);
+        }
+
+        [TestMethod()]
+        public void GenerateSubsetsRecursiveTest()
+        {
+            //Arrange
+            string item = "abcd";
+            int subsetLength = 2;
+            char[] temp = new char[item.Length];
+            IList<string> subsets = new List<string>();
+
+            //Act
+            _target.GenerateSubsetsRecursive(item, subsetLength, temp, subsets);
+
+            //Assert
+            Assert.AreEqual(6, subsets.Count);
+            Assert.AreEqual<string>("ab", subsets[0]);
+            Assert.AreEqual<string>("ac", subsets[1]);
+            Assert.AreEqual<string>("ad", subsets[2]);
+            Assert.AreEqual<string>("bc", subsets[3]);
+            Assert.AreEqual<string>("bd", subsets[4]);
+            Assert.AreEqual<string>("cd", subsets[5]);
+
+        }
+
+        [TestMethod()]
+        public void GenerateSubsetsTest()
+        {
+            //Arrange
+            string item = "abcd";
+
+            //Act
+            IEnumerable<string> actual = _target.GenerateSubsets(item);
+
+            //Assert
+            Assert.AreEqual(10, actual.Count());
         }
 
         #endregion

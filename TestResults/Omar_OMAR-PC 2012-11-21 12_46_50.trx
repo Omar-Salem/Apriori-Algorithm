@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="d5cc7e5d-1f22-4426-b7f0-f64e3e1479ee" name="Omar@OMAR-PC 2012-11-21 12:46:50" runUser="Omar-PC\Omar" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="eef0e273-97f3-4062-8c3f-615cccc566c4">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment enabled="false" runDeploymentRoot="Omar_OMAR-PC 2012-11-21 12_46_50">
+      <DeploymentItem filename="D:\Git\Apriori Source Code\AprioriAlgorithm\bin\Debug\AprioriAlgorithm.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2012-11-21T12:46:50.6036999+02:00" queuing="2012-11-21T12:46:50.7667092+02:00" start="2012-11-21T12:46:50.8097117+02:00" finish="2012-11-21T12:46:51.2897391+02:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="GenerateCombinationRecursiveTest" storage="d:\git\apriori source code\unittests\bin\debug\unittests.dll" id="30741b83-8ace-0eec-06f6-f79331378a58">
+      <Execution id="8549177c-647e-44aa-b01b-37d478fb9a7b" />
+      <TestMethod codeBase="D:/Git/Apriori Source Code/UnitTests/bin/Debug/UnitTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTests.AprioriTest, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GenerateCombinationRecursiveTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="30741b83-8ace-0eec-06f6-f79331378a58" executionId="8549177c-647e-44aa-b01b-37d478fb9a7b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="8549177c-647e-44aa-b01b-37d478fb9a7b" testId="30741b83-8ace-0eec-06f6-f79331378a58" testName="GenerateCombinationRecursiveTest" computerName="OMAR-PC" duration="00:00:00.0969004" startTime="2012-11-21T12:46:50.8337130+02:00" endTime="2012-11-21T12:46:51.2447365+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8549177c-647e-44aa-b01b-37d478fb9a7b">
+    </UnitTestResult>
+  </Results>
+</TestRun>

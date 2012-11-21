@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContainerProvider.cs" />
+    <Compile Include="Contracts\ISorter.cs" />
+    <Compile Include="Implementation\Sorter.cs" />
     <Compile Include="IndexedDictionary.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\Output.cs" />
