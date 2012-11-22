@@ -164,7 +164,7 @@ namespace WPFClient
 
         public ICommand ClearAllTransactions
         {
-            get { return new RelayCommand(ClearAllTransactionsExecute, () => true); }
+            get { return new RelayCommand(ClearAllTransactionsExecute, () => Transactions.Count != 0); }
         }
 
         public ICommand ProcessTransactions
