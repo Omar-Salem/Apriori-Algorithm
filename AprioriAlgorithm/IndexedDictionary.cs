@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace AprioriAlgorithm
 {
@@ -7,6 +8,14 @@ namespace AprioriAlgorithm
         protected override string GetKeyForItem(Item item)
         {
             return item.Name;
+        }
+
+        internal void ConcatItems(IList<Item> frequentItems)
+        {
+            foreach (var item in frequentItems)
+            {
+                this.Add(item);
+            }
         }
     }
 }

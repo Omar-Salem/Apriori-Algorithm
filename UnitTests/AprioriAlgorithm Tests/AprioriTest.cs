@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace UnitTests
 {
@@ -53,12 +54,6 @@ namespace UnitTests
             Assert.AreEqual(3, actual.FrequentItems["be"].Support);
             Assert.AreEqual(2, actual.FrequentItems["ce"].Support);
             Assert.AreEqual(2, actual.FrequentItems["bce"].Support);
-
-            Assert.AreEqual(4, actual.ClosedItemSets.Count, "ClosedItemSets calculation is wrong");
-            Assert.IsTrue(actual.ClosedItemSets.ContainsKey("c"));
-            Assert.IsTrue(actual.ClosedItemSets.ContainsKey("be"));
-            Assert.IsTrue(actual.ClosedItemSets.ContainsKey("ac"));
-            Assert.IsTrue(actual.ClosedItemSets.ContainsKey("bce"));
 
             Assert.AreEqual(2, actual.MaximalItemSets.Count);
             Assert.AreEqual("ac", actual.MaximalItemSets[0]);
@@ -224,6 +219,168 @@ namespace UnitTests
 
             //Assert
             Assert.AreEqual(10, actual.Count());
+        }
+
+        [TestMethod()]
+        public void GetRemainingTest()
+        {
+            //Arrange
+            string child = "ac";
+            string parent = "abcd";
+
+            //Act
+            string actual = _target.GetRemaining(child, parent);
+
+            //Assert
+            Assert.AreEqual("bd", actual);
+        }
+
+        [TestMethod()]
+        public void GetClosedItemSetsTest()
+        {
+            //Arrange
+            ItemsDictionary allFrequentItems = new ItemsDictionary();
+            allFrequentItems.Add(new Item { Name = "a", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "b", Support = 3 });
+            allFrequentItems.Add(new Item { Name = "c", Support = 3 });
+            allFrequentItems.Add(new Item { Name = "e", Support = 3 });
+            allFrequentItems.Add(new Item { Name = "ac", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "bc", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "be", Support = 3 });
+            allFrequentItems.Add(new Item { Name = "ce", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "bce", Support = 2 });
+
+            //Act
+            Dictionary<string, Dictionary<string, double>> actual = _target.GetClosedItemSets(allFrequentItems);
+
+            //Assert
+            Assert.AreEqual(4, actual.Count, "ClosedItemSets calculation is wrong");
+            Assert.IsTrue(actual.ContainsKey("c"));
+            Assert.IsTrue(actual.ContainsKey("be"));
+            Assert.IsTrue(actual.ContainsKey("ac"));
+            Assert.IsTrue(actual.ContainsKey("bce"));
+        }
+
+        [TestMethod()]
+        public void GetItemParentsTest()
+        {
+            //Arrange
+            string child = "a";
+            int index = 1;
+
+            ItemsDictionary allFrequentItems = new ItemsDictionary();
+            allFrequentItems.Add(new Item { Name = "e", Support = 3 });
+            allFrequentItems.Add(new Item { Name = "ac", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "bc", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "be", Support = 3 });
+            allFrequentItems.Add(new Item { Name = "ce", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "bce", Support = 2 });
+
+            //Act
+            Dictionary<string, double> actual = _target.GetItemParents(child, index, allFrequentItems);
+
+            //Assert
+            Assert.AreEqual(1, actual.Count);
+            Assert.AreEqual(2, actual["ac"]);
+
+        }
+
+        [TestMethod()]
+        public void CheckIsClosed_OpenItemTest()
+        {
+            //Arrange
+            string child = "a";
+            Dictionary<string, double> parents = new Dictionary<string, double>();
+            parents.Add("ac", 2);
+            ItemsDictionary allFrequentItems = new ItemsDictionary();
+            allFrequentItems.Add(new Item { Name = "a", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "ac", Support = 2 });
+
+            //Act
+            bool actual = _target.CheckIsClosed(child, parents, allFrequentItems);
+
+            //Assert
+            Assert.IsFalse(actual);
+        }
+
+        [TestMethod()]
+        public void CheckIsClosed_ClosedItemTest()
+        {
+            //Arrange
+            string child = "c";
+            Dictionary<string, double> parents = new Dictionary<string, double>();
+            parents.Add("ac", 2);
+            parents.Add("bc", 2);
+            parents.Add("ce", 2);
+
+            ItemsDictionary allFrequentItems = new ItemsDictionary();
+            allFrequentItems.Add(new Item { Name = "c", Support = 3 });
+            allFrequentItems.Add(new Item { Name = "ac", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "bc", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "ce", Support = 2 });
+
+            //Act
+            bool actual = _target.CheckIsClosed(child, parents, allFrequentItems);
+
+            //Assert
+            Assert.IsTrue(actual);
+        }
+
+        [TestMethod()]
+        public void GetMaximalItemSetsTest()
+        {
+            //Arrange
+            var closedItemSets = new Dictionary<string, Dictionary<string, double>>();
+            closedItemSets.Add("a", new Dictionary<string, double>());
+            closedItemSets.Add("b", new Dictionary<string, double>() { { "x", 2 } });
+
+            //Act
+            IList<string> actual = _target.GetMaximalItemSets(closedItemSets);
+
+            //Assert
+            Assert.AreEqual(1, actual.Count);
+            Assert.AreEqual("a", actual[0]);
+        }
+
+        [TestMethod()]
+        public void GenerateRulesTest()
+        {
+            //Arrange
+            ItemsDictionary allFrequentItems = new ItemsDictionary();
+            allFrequentItems.Add(new Item { Name = "ac", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "bc", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "be", Support = 3 });
+            allFrequentItems.Add(new Item { Name = "ce", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "bce", Support = 2 });
+
+            //Act
+            HashSet<Rule> actual = _target.GenerateRules(allFrequentItems);
+
+            //Assert
+            Assert.AreEqual(7, actual.Count);
+        }
+
+        [TestMethod()]
+        public void GetStrongRulesTest()
+        {
+            //Arrange
+            double minConfidence = .8;
+            HashSet<Rule> rules = new HashSet<Rule>();
+            rules.Add(new Rule("a", "c", 0));
+            rules.Add(new Rule("b", "c", 0));
+
+            ItemsDictionary allFrequentItems = new ItemsDictionary();
+            allFrequentItems.Add(new Item { Name = "a", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "b", Support = 3 });
+            allFrequentItems.Add(new Item { Name = "c", Support = 3 });
+            allFrequentItems.Add(new Item { Name = "ac", Support = 2 });
+            allFrequentItems.Add(new Item { Name = "bc", Support = 2 });
+
+            //Act
+            IList<Rule> actual = _target.GetStrongRules(minConfidence, rules, allFrequentItems);
+
+            //Assert
+            Assert.AreEqual(1, actual.Count);
         }
 
         #endregion
