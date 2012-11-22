@@ -1,8 +1,6 @@
 ﻿using WPFClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using Moq;
-using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Collections.Generic;

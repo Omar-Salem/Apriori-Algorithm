@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using System.Diagnostics;
 
 namespace WPFClient
 {
+    /// <summary>
+    /// Taken from http://msdn.microsoft.com/en-us/magazine/dd419663.aspx
+    /// </summary>
     public class RelayCommand : ICommand
     {
         #region Members
