@@ -40,10 +40,10 @@
             }
             while (candidates.Count != 0);
 
-            var rules = GenerateRules();
-            var strongRules = GetStrongRules(minConfidence, rules);
-            var closedItemSets = GetClosedItemSets();
-            var maximalItemSets = GetMaximalItemSets(closedItemSets);
+            HashSet<Rule> rules = GenerateRules();
+            IList<Rule> strongRules = GetStrongRules(minConfidence, rules);
+            Dictionary<string, Dictionary<string, double>> closedItemSets = GetClosedItemSets();
+            IList<string> maximalItemSets = GetMaximalItemSets(closedItemSets);
 
             return new Output
             {
@@ -77,11 +77,11 @@
             return frequentItemsL1;
         }
 
-        private double GetSupport(string generatedCandidate, IEnumerable<string> transactions)
+        private double GetSupport(string generatedCandidate, IEnumerable<string> transactionsList)
         {
             double support = 0;
 
-            foreach (string transaction in transactions)
+            foreach (string transaction in transactionsList)
             {
                 if (CheckIsSubset(generatedCandidate, transaction))
                 {
@@ -174,7 +174,7 @@
 
             foreach (var item in _allFrequentItems)
             {
-                var parents = GetItemParents(item.Name, ++i);
+                Dictionary<string, double> parents = GetItemParents(item.Name, ++i);
 
                 if (CheckIsClosed(item.Name, parents))
                 {
@@ -224,7 +224,7 @@
 
             foreach (string item in closedItemSets.Keys)
             {
-                var parents = closedItemSets[item];
+                Dictionary<string, double> parents = closedItemSets[item];
 
                 if (parents.Count == 0)
                 {

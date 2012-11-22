@@ -71,7 +71,7 @@ namespace UnitTests
         public void GetL1FrequentItemsTest()
         {
             //Act
-            var actual = _target.GetL1FrequentItems(_minSupport, _items, _transactions);
+            IList<Item> actual = _target.GetL1FrequentItems(_minSupport, _items, _transactions);
 
             //Assert
             Assert.AreEqual(4, actual.Count);
@@ -88,7 +88,7 @@ namespace UnitTests
             string candidate = "a";
 
             //Act
-            var actual = _target.GetSupport(candidate, _transactions);
+            double actual = _target.GetSupport(candidate, _transactions);
 
             //Assert
             Assert.AreEqual(2, actual);
@@ -102,7 +102,7 @@ namespace UnitTests
             string parent = "abcde";
 
             //Act
-            var actual = _target.CheckIsSubset(child, parent);
+            bool actual = _target.CheckIsSubset(child, parent);
 
             //Assert
             Assert.IsTrue(actual);
@@ -121,7 +121,7 @@ namespace UnitTests
             };
 
             //Act
-            var actual = _target.GenerateCandidates(frequentItems, _transactions);
+            Dictionary<string, double> actual = _target.GenerateCandidates(frequentItems, _transactions);
 
             //Assert
             Assert.AreEqual(actual.Count, 6);
@@ -138,7 +138,7 @@ namespace UnitTests
         public void GenerateCandidate_SameFirstElementTest()
         {
             //Act
-            var actual = _target.GenerateCandidate("be", "bc");
+            string actual = _target.GenerateCandidate("be", "bc");
 
             //Assert
             Assert.AreEqual(actual, "bec");
@@ -148,7 +148,7 @@ namespace UnitTests
         public void GenerateCandidate_SingleElementsTest()
         {
             //Act
-            var actual = _target.GenerateCandidate("a", "b");
+            string actual = _target.GenerateCandidate("a", "b");
 
             //Assert
             Assert.AreEqual(actual, "ab");
@@ -158,7 +158,7 @@ namespace UnitTests
         public void GenerateCandidate_DifferentFirstElementTest()
         {
             //Act
-            var actual = _target.GenerateCandidate("ce", "be");
+            string actual = _target.GenerateCandidate("ce", "be");
 
             //Assert
             Assert.AreEqual(actual, string.Empty);
@@ -179,7 +179,7 @@ namespace UnitTests
             };
 
             //Act
-            var actual = _target.GetFrequentItems(candidates, _minSupport, _transactions.Count());
+            IList<Item> actual = _target.GetFrequentItems(candidates, _minSupport, _transactions.Count());
 
             //Assert
             Assert.AreEqual(actual.Count, 4);

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using AprioriAlgorithm;
 using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace WPFClient
 {
@@ -184,7 +185,7 @@ namespace WPFClient
         private bool CanAddItemExecute()
         {
             CharacterOnlyRule characterOnlyRule = new CharacterOnlyRule();
-            var validationResult = characterOnlyRule.Validate(NewItem, System.Globalization.CultureInfo.CurrentCulture);
+            ValidationResult validationResult = characterOnlyRule.Validate(NewItem, System.Globalization.CultureInfo.CurrentCulture);
 
             return validationResult.IsValid;
         }
@@ -207,13 +208,13 @@ namespace WPFClient
 
         private void AddTransactionExecute()
         {
-            var selectedItems = Items.Where(i => i.Selected).Select(i => i.Name);
+            IEnumerable<char> selectedItems = Items.Where(i => i.Selected).Select(i => i.Name);
             Transactions.Add(new string(selectedItems.ToArray()));
         }
 
         private bool CanAddTransactionExecute()
         {
-            var selectedItems = Items.Where(i => i.Selected);
+            IEnumerable<Item> selectedItems = Items.Where(i => i.Selected);
             return selectedItems.Count() != 0;
         }
 

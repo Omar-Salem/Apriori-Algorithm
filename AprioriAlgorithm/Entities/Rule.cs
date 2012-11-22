@@ -44,7 +44,7 @@ namespace AprioriAlgorithm
         public override int GetHashCode()
         {
             ISorter sorter = new Sorter();
-            var sortedXY = sorter.Sort(X + Y);
+            string sortedXY = sorter.Sort(X + Y);
             return sortedXY.GetHashCode();
         }
 

@@ -12,8 +12,8 @@ namespace UnitTests
     {
         #region Member Variables
 
-        readonly Mock<AprioriAlgorithm.IApriori> aprioriMock;
-        readonly MainViewModel target;
+        readonly Mock<AprioriAlgorithm.IApriori> _aprioriMock;
+        readonly MainViewModel _target;
 
         #endregion
 
@@ -21,8 +21,8 @@ namespace UnitTests
 
         public MainViewModelTest()
         {
-            aprioriMock = new Mock<AprioriAlgorithm.IApriori>();
-            target = new MainViewModel(aprioriMock.Object);
+            _aprioriMock = new Mock<AprioriAlgorithm.IApriori>();
+            _target = new MainViewModel(_aprioriMock.Object);
         }
 
         #endregion
@@ -33,13 +33,13 @@ namespace UnitTests
         public void AddItemTest()
         {
             //Arrange
-            target.NewItem = "a";
+            _target.NewItem = "a";
 
             //Act
-            target.AddItem.Execute(null);
+            _target.AddItem.Execute(null);
 
             //Assert
-            Assert.AreEqual(1, target.Items.Count);
+            Assert.AreEqual(1, _target.Items.Count);
         }
 
         [TestMethod()]
@@ -49,15 +49,15 @@ namespace UnitTests
             var itemA = new Item { Name = 'a' };
             var itemB = new Item { Name = 'b' };
 
-            target.Items = new ObservableSet<Item> { itemA, itemB };
+            _target.Items = new ObservableSet<Item> { itemA, itemB };
 
             //Act
-            target.SelectedItem = itemA;
-            target.RemoveItem.Execute(null);
+            _target.SelectedItem = itemA;
+            _target.RemoveItem.Execute(null);
 
             //Assert
-            Assert.AreEqual(1, target.Items.Count);
-            Assert.AreEqual(itemB.Name, target.Items[0].Name);
+            Assert.AreEqual(1, _target.Items.Count);
+            Assert.AreEqual(itemB.Name, _target.Items[0].Name);
         }
 
         [TestMethod()]
@@ -66,17 +66,17 @@ namespace UnitTests
             //Arrange
             var itemA = new Item { Name = 'a' };
             var itemB = new Item { Name = 'b' };
-            target.Items = new ObservableSet<Item> { itemA, itemB };
-            var transaction = itemA.Name + "" + itemB.Name;
-            target.Transactions = new ObservableCollection<string> { transaction };
+            _target.Items = new ObservableSet<Item> { itemA, itemB };
+            string transaction = itemA.Name + "" + itemB.Name;
+            _target.Transactions = new ObservableCollection<string> { transaction };
 
             //Act
-            target.SelectedItem = itemA;
-            target.RemoveItem.Execute(null);
+            _target.SelectedItem = itemA;
+            _target.RemoveItem.Execute(null);
 
             //Assert
-            Assert.AreEqual(2, target.Items.Count);
-            Assert.AreNotEqual(string.Empty, target.Error);
+            Assert.AreEqual(2, _target.Items.Count);
+            Assert.AreNotEqual(string.Empty, _target.Error);
         }
 
         [TestMethod()]
@@ -87,14 +87,14 @@ namespace UnitTests
             var itemB = new Item { Name = 'b' };
             var itemC = new Item { Name = 'c', Selected = true };
 
-            target.Items = new ObservableSet<Item> { itemA, itemB, itemC };
+            _target.Items = new ObservableSet<Item> { itemA, itemB, itemC };
 
             //Act
-            target.AddTransaction.Execute(null);
+            _target.AddTransaction.Execute(null);
 
             //Assert
-            Assert.AreEqual(1, target.Transactions.Count);
-            Assert.AreEqual("ac", target.Transactions[0]);
+            Assert.AreEqual(1, _target.Transactions.Count);
+            Assert.AreEqual("ac", _target.Transactions[0]);
         }
 
         [TestMethod()]
@@ -104,10 +104,10 @@ namespace UnitTests
             var itemA = new Item { Name = 'a' };
             var itemB = new Item { Name = 'b' };
 
-            target.Items = new ObservableSet<Item> { itemA, itemB };
+            _target.Items = new ObservableSet<Item> { itemA, itemB };
 
             //Assert
-            Assert.IsFalse(target.AddTransaction.CanExecute(null));
+            Assert.IsFalse(_target.AddTransaction.CanExecute(null));
         }
 
         [TestMethod()]
@@ -117,10 +117,10 @@ namespace UnitTests
             var itemA = new Item { Name = 'a', Selected = true };
             var itemB = new Item { Name = 'b' };
 
-            target.Items = new ObservableSet<Item> { itemA, itemB };
+            _target.Items = new ObservableSet<Item> { itemA, itemB };
 
             //Assert
-            Assert.IsTrue(target.AddTransaction.CanExecute(null));
+            Assert.IsTrue(_target.AddTransaction.CanExecute(null));
         }
 
         [TestMethod()]
@@ -128,14 +128,14 @@ namespace UnitTests
         {
             //Arrange
             var transaction = "ab";
-            target.Transactions = new ObservableCollection<string> { transaction, "cd" };
+            _target.Transactions = new ObservableCollection<string> { transaction, "cd" };
 
             //Act
-            target.SelectedTransaction = transaction;
-            target.DeleteTransaction.Execute(null);
+            _target.SelectedTransaction = transaction;
+            _target.DeleteTransaction.Execute(null);
 
             //Assert
-            Assert.AreEqual(1, target.Transactions.Count);
+            Assert.AreEqual(1, _target.Transactions.Count);
         }
 
         [TestMethod()]
@@ -143,27 +143,28 @@ namespace UnitTests
         {
             //Arrange
             var transaction = "ab";
-            target.Transactions = new ObservableCollection<string> { transaction, "cd" };
+            _target.Transactions = new ObservableCollection<string> { transaction, "cd" };
 
             //Act
-            target.SelectedTransaction = transaction;
-            target.ClearAllTransactions.Execute(null);
+            _target.SelectedTransaction = transaction;
+            _target.ClearAllTransactions.Execute(null);
 
             //Assert
-            Assert.AreEqual(0, target.Transactions.Count);
+            Assert.AreEqual(0, _target.Transactions.Count);
         }
 
         [TestMethod()]
         public void ProcessTransactionsTest()
         {
             //Arrange
-            var items = target.Items.Select(t => t.Name.ToString());
+            IEnumerable<string> items = _target.Items.Select(t => t.Name.ToString());
+            string[] transactionsList = _target.Transactions.ToArray();
 
             //Act
-            target.ProcessTransactions.Execute(null);
+            _target.ProcessTransactions.Execute(null);
 
             //Assert
-            aprioriMock.Verify(a => a.ProcessTransaction(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<IEnumerable<string>>(), It.IsAny<string[]>()), Times.Once());
+            _aprioriMock.Verify(a => a.ProcessTransaction(_target.MinSupport / 100, _target.MinConfidence / 100, items, transactionsList), Times.Once());
 
         }
 
@@ -171,20 +172,20 @@ namespace UnitTests
         public void CanRemoveItemWhenSelectedItemIsNull()
         {
             //Act
-            target.RemoveItem.Execute(null);
+            _target.RemoveItem.Execute(null);
 
             //Assert
-            Assert.IsFalse(target.RemoveItem.CanExecute(null));
+            Assert.IsFalse(_target.RemoveItem.CanExecute(null));
         }
 
         [TestMethod()]
         public void CanDeleteTransactionWhenSelectedTransactionIsNull()
         {
             //Act
-            target.DeleteTransaction.Execute(null);
+            _target.DeleteTransaction.Execute(null);
 
             //Assert
-            Assert.IsFalse(target.DeleteTransaction.CanExecute(null));
+            Assert.IsFalse(_target.DeleteTransaction.CanExecute(null));
         }
 
         #endregion

@@ -14,7 +14,7 @@ namespace UnitTests
             var token = "cba";
 
             //Act
-            var actual = target.Sort(token);
+            string actual = target.Sort(token);
 
             //Assert
             Assert.AreEqual(actual, "abc");
