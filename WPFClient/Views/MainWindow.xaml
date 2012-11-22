@@ -5,9 +5,14 @@
        Title="Apriori Demo" Height="531" Width="525" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ControlTemplate x:Key="validationTemplate">
-            <DockPanel>
-                <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
-                <AdornedElementPlaceholder/>
+            <DockPanel LastChildFill="True">
+                <TextBlock DockPanel.Dock="Right" 
+        Foreground="Red" 
+        FontSize="12pt">Characters only</TextBlock>
+
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder />
+                </Border>
             </DockPanel>
         </ControlTemplate>
         <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
@@ -35,9 +40,9 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <Button Content="Add Item" Height="23" Name="button1" Width="75" Command="{Binding AddItem}"/>
                         <Label Content="{Binding Error}"  Height="28" Name="label4" Foreground="Red" />
                     </StackPanel>
+                    <Button Content="Add Item" Height="23" Name="button1" Width="75" Command="{Binding AddItem}"/>
 
                     <Button Content="Remove Items" Height="23" Name="button2" Width="75" Command="{Binding RemoveItem}"/>
                     <DataGrid AutoGenerateColumns="False" Name="dataGrid1" Width="80" SelectedItem="{Binding SelectedItem}"  ItemsSource="{Binding Items}" IsReadOnly="True">
