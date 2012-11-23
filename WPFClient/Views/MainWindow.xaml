@@ -85,7 +85,7 @@
                         <Slider Height="23" Name="slider1" Width="300" Minimum="1" Maximum="100" Value="{Binding MinSupport}" IsSnapToTickEnabled="True" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="min. Confidence %" Height="28" />
+                        <Label Content="min. Confidence " Height="28" />
                         <Label Content="{Binding MinConfidence}" Height="28"/>
                         <Label Content=" %" Height="28"/>
                         <Slider Height="23" Name="slider2" Width="300" Minimum="1" Maximum="100" Value="{Binding MinConfidence}" IsSnapToTickEnabled="True" />
