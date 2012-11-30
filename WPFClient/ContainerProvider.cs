@@ -16,6 +16,7 @@ namespace WPFClient
                 {
                     List<AssemblyCatalog> catalogList = new List<AssemblyCatalog>();
                     catalogList.Add(new AssemblyCatalog(typeof(IApriori).Assembly));
+                    catalogList.Add(new AssemblyCatalog(typeof(IResult).Assembly));
                     container = new CompositionContainer(new AggregateCatalog(catalogList));
                 }
 

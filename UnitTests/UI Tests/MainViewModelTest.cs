@@ -13,6 +13,7 @@ namespace UnitTests
         #region Member Variables
 
         readonly Mock<AprioriAlgorithm.IApriori> _aprioriMock;
+        readonly Mock<IResult> _resultWindowMock;
         readonly MainViewModel _target;
 
         #endregion
@@ -22,7 +23,8 @@ namespace UnitTests
         public MainViewModelTest()
         {
             _aprioriMock = new Mock<AprioriAlgorithm.IApriori>();
-            _target = new MainViewModel(_aprioriMock.Object);
+            _resultWindowMock = new Mock<IResult>();
+            _target = new MainViewModel(_aprioriMock.Object, _resultWindowMock.Object);
         }
 
         #endregion
@@ -165,6 +167,7 @@ namespace UnitTests
 
             //Assert
             _aprioriMock.Verify(a => a.ProcessTransaction(_target.MinSupport / 100, _target.MinConfidence / 100, items, transactionsList), Times.Once());
+            _resultWindowMock.Verify(r => r.Show(It.IsAny<AprioriAlgorithm.Output>()), Times.Once());
 
         }
 

@@ -60,7 +60,8 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ContainerProvider.cs" />
     <Compile Include="Models\Item.cs" />
-    <Compile Include="ObservableSet.cs" />
+    <Compile Include="Models\ObservableSet.cs" />
+    <Compile Include="Abstract\IResult.cs" />
     <Compile Include="Views\Result.xaml.cs">
       <DependentUpon>Result.xaml</DependentUpon>
     </Compile>

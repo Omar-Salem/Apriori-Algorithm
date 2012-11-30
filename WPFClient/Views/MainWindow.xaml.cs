@@ -24,7 +24,9 @@ namespace WPFClient.Views
             InitializeComponent();
 
             var apriori = ContainerProvider.Container.GetExportedValue<IApriori>();
-            this.DataContext = new MainViewModel(apriori);
+            IResult resultWindow = ContainerProvider.Container.GetExportedValue<IResult>();
+
+            this.DataContext = new MainViewModel(apriori, resultWindow);
         }
     }
 }

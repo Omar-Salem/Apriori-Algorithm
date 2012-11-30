@@ -16,18 +16,19 @@ namespace WPFClient
         string _selectedTransaction, _newItem, _error;
         double _minSupport = 1, _minConfidence = 1;
         Item _selectedItem;
-
+        readonly IResult _resultWindow;
         readonly IApriori _apriori;
 
         #endregion
 
         #region Constructor
 
-        public MainViewModel(IApriori apriori)
+        public MainViewModel(IApriori apriori, IResult resultWindow)
         {
             _items = new ObservableSet<Item>();
             _transactions = new ObservableCollection<string>();
             this._apriori = apriori;
+            this._resultWindow = resultWindow;
         }
 
         #endregion
@@ -232,9 +233,7 @@ namespace WPFClient
         {
             IEnumerable<string> items = Items.Select(t => t.Name.ToString());
             Output output = _apriori.ProcessTransaction(MinSupport / 100, MinConfidence / 100, items, Transactions.ToArray());
-
-            Result result = new Result(output);
-            result.Show();
+            _resultWindow.Show(output);
         }
 
         #endregion

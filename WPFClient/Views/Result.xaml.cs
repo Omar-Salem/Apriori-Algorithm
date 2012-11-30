@@ -1,14 +1,21 @@
 ﻿using System.Windows;
 using AprioriAlgorithm;
+using System.ComponentModel.Composition;
 
 namespace WPFClient
 {
-    public partial class Result : Window
+    [Export(typeof(IResult))]
+    public partial class Result : Window, IResult
     {
-        public Result(Output output)
+        public Result()
         {
             InitializeComponent();
+        }
+
+        public void Show(Output output)
+        {
             this.DataContext = output;
+            this.ShowDialog();
         }
     }
 }
