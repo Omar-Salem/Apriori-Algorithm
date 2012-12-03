@@ -45,7 +45,7 @@
                     <Button Content="Add Item" Height="23" Name="button1" Width="75" Command="{Binding AddItem}"/>
 
                     <Button Content="Remove Items" Height="23" Name="button2" Width="75" Command="{Binding RemoveItem}"/>
-                    <DataGrid AutoGenerateColumns="False" Name="dataGrid1" Width="80" SelectedItem="{Binding SelectedItem}"  ItemsSource="{Binding Items}" IsReadOnly="True">
+                    <DataGrid AutoGenerateColumns="False" Height="75"  Width="80" SelectedItem="{Binding SelectedItem}"  ItemsSource="{Binding Items}" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
